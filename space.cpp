@@ -266,8 +266,5 @@ void Space::setCorner(Space *roomIn) {
 }
 
 void Space::roomWelcome() const {
-	cout << "You have entered the " << name << "." << endl;
+	cout << "\nYou have entered the " << name << "." << endl;
 }
-
-
-

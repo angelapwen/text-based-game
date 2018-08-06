@@ -12,10 +12,11 @@
 #include "eat.hpp"
 #include "entertain.hpp"
 #include "satchel.hpp"
+#include "map.hpp"
 
 class Game {
 private:
-//	Map* map;
+ 	Map* map;
 
 	Satchel* satchel;
 
@@ -39,6 +40,8 @@ public:
 	void welcomeMenu() const;
 
 	void startGame();
+
+	void updateBoard();
 
 	void commitMurder();
 

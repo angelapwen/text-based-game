@@ -18,6 +18,7 @@ int TOTALMOVES = 100;
 
 Game::Game() {
 	satchel = new Satchel();
+	map = new Map();
 	steps = 0;
 	murder = false;
 
@@ -25,7 +26,7 @@ Game::Game() {
 	study = new Quiet("study","candlestick","a book of meditation");
 	library = new Quiet("library", "rope", "a box of sleeping pills");
 	conservatory = new Quiet("conservatory", "knife", "a pair of earmuffs");
-	billiards = new Entertain("billiards room", "lead pipe", "darts");
+	billiards = new Entertain("billiard room", "lead pipe", "darts");
 	ballroom = new Entertain("ballroom", "rope", "record player");
 	hall = new Entertain("hall", "wrench", "doorbell");
 	kitchen = new Eat("kitchen", "knife", "an apple");
@@ -105,6 +106,10 @@ void Game::startGame() {
 			 << endl;
 		cout << "You are on Move #" << steps << "." << endl;
 
+		// Move player to correct place and print board
+		updateBoard();
+		map->printBoard();
+
 		// First check if player has enough weapons and is in the Billiards Room
 		if ((satchel->getTotalWeapons()) > 3 && current->getName() == "billiards "
 																				  "room") {
@@ -159,6 +164,7 @@ void Game::startGame() {
 				default:
 					break;
 			}
+
 		}
 	}
 
@@ -208,10 +214,44 @@ void Game::startGame() {
 	}
 }
 
+void Game::updateBoard() {
+	if (current->getName() == "study") {
+		map->placeStudy();
+	}
+	else if (current->getName() == "library") {
+		map->placeLibrary();
+	}
+	else if (current->getName() == "conservatory") {
+		map->placeConservatory();
+	}
+	else if (current->getName() == "billiards room") {
+		map->placeBilliards();
+	}
+	else if (current->getName() == "dining room") {
+		map->placeDining();
+	}
+	else if (current->getName() == "ballroom") {
+		map->placeBallroom();
+	}
+	else if (current->getName() == "lounge") {
+		map->placeLounge();
+	}
+	else if (current->getName() == "kitchen") {
+		map->placeKitchen();
+	}
+	else if (current->getName() == "hall") {
+		map->placeHall();
+	}
+	else {
+		cout << "Invalid room name." << endl;
+	}
+
+}
+
 void Game::commitMurder() {
 	string weaponChoice;
 
-	cout << "Mr. Boddy has entered the billiards room." << endl;
+	cout << "Mr. Boddy has entered the billiard room." << endl;
 	cout << "You have successfully collected at least four weapons." << endl;
 	cout << "This is your opportunity to murder him and flee the scene!" << endl;
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
@@ -305,6 +345,7 @@ void Game::repeatMenu() const {
 
 Game::~Game() {
 	delete satchel;
+	delete map;
 
 	// Delete all rooms
 	delete study;

@@ -37,14 +37,8 @@ string Space::getWeapon() const {
 }
 
 char Space::makeMove() const {
-	// If pointer != nullptr, then display room option
-			// Prompt string input from user
-					// If string input != top bottom left right corner, try again
-							// If this->input == nullptr, try again
-									// Return move as int (enum maybe)
-
 	cout << "\nIt is time to move to another room." << endl;
-	cout << "Your options for moving are: " << endl;
+	cout << "Your options are: " << endl;
 
 	if (this->top != nullptr) {
 		cout << "- Top: " ;

@@ -14,6 +14,8 @@
 #include "basicSatchel.hpp"
 #include "map.hpp"
 
+#include <string>
+
 class Game {
 private:
  	Map* map;

@@ -7,14 +7,13 @@
 
 #include "game.hpp"
 
-#include <string>
-
 using std::string;
 using std::cout;
 using std::endl;
 using std::cin;
 
-int TOTAL_MOVES = 100;
+// Total number of moves the player is allowed before the game ends
+const int TOTAL_MOVES = 100;
 
 Game::Game() {
 	satchel = new basicSatchel();
@@ -78,7 +77,7 @@ void Game::welcomeMenu() const {
 	     "\n********************************************************************************"
 	     << endl;
 	cout << "\nGood evening, Professor Plum." << endl;
-	cout << "We have received your application to join us at HYDRA." << endl;
+	cout << "We have received your application to join us at Hydra." << endl;
 	cout << "We were pleased to hear of your interest, as we have been ";
 	cout << "watching closely over\nyour work in the past few years." << endl;
 	cout << "\nAs you know, we are an ancient Brotherhood." << endl;
@@ -111,10 +110,15 @@ void Game::welcomeMenu() const {
 
 	cout << "\nYou may choose to use the Emergency Exit at any point in the "
 			"game, although\nthis means you will not have completed your mission"
-			" and have failed HYDRA." << endl;
+			" and have failed Hydra." << endl;
 	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
 	     endl;
 	cout << "Hail, Hydra!" << endl;
+	cout << "\nPress enter to acknowledge you have received and understood "
+			"your mission."	<< endl;
+	string temp;
+	getline(cin, temp);
+
 }
 
 void Game::startGame() {
@@ -128,7 +132,7 @@ void Game::startGame() {
 		steps++;
 
 		cout <<
-		     "\n********************************************************************************"
+		     "********************************************************************************"
 		     << endl;
 		cout << "You are on Move #" << steps << "." << endl;
 
@@ -167,9 +171,6 @@ void Game::startGame() {
 			// Depending on char returned, point current to new room or exit
 			switch (move) {
 				case 't':
-
-					// current = current->top; // Cannot access because inaccessible
-
 					current = current->getTop();
 					break;
 				case 'b':
@@ -190,16 +191,15 @@ void Game::startGame() {
 				default:
 					break;
 			}
-
 		}
 	}
 
-	// If murder has been committed, display congratulations and allow user to
-	// escape
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
+
+	// If murder has been committed, display congratulations
 	if (murder) {
-		cout <<
-		     "\n********************************************************************************"
-		     << endl;
 		cout << "Congratulations, professor! You have completed your mission." <<
 		     endl;
 		cout << "It took you " << steps << " steps to complete your mission." <<
@@ -209,40 +209,28 @@ void Game::startGame() {
 		cout << "Open the door and step in to your freedom." << endl;
 		cout << "\n\nYour second mission:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
-			 "MUDER." << endl;
+			 "MURDER." << endl;
 		cout << "The others will be here soon..." << endl;
 		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
 			 "place." << endl;
-		cout <<
-		     "********************************************************************************"
-		     << endl;
+
 	}
 
-		// Else if user reached max number of steps, tell user sorry and maybe they
-		// will be a better murderer next time
+		// Else if user reached max number of steps, display exit message
 	else if (steps >= TOTAL_MOVES) {
-		cout <<
-		     "\n********************************************************************************"
-		     << endl;
 		cout << "Unfortunately, you exceeded the total number of moves to "
 				  "complete your mission." << endl;
-		cout << "We have removed you from Mr. Boddy's mansion." << endl;
+		cout << "We have removed you from Mr. Boddy's estate." << endl;
 		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
-		cout << "The HYDRA selection process is a dangerous one." << endl;
+		cout << "The Hydra selection process is a dangerous one." << endl;
 		cout << "Those who do not successfully complete it are liabilities to "
 			 "our organization." << endl;
-		cout << "Perhaps you may serve HYDRA in your next life." << endl;
+		cout << "Perhaps you may serve Hydra in your next life." << endl;
 		cout << "\n\n\nDo you have any last words before we begin?" << endl;
-		cout <<
-		     "********************************************************************************"
-		     << endl;
 	 }
 
-	// Else user has elected to exit, thank user for playing
+	// Else user has elected to exit, display exit message
 	else {
-		cout <<
-		     "\n********************************************************************************"
-		     << endl;
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
 		     " steps." << endl;
 		cout << "You chose not to complete your mission." << endl;
@@ -250,15 +238,16 @@ void Game::startGame() {
 		cout << "The HYDRA selection process is a dangerous one." << endl;
 		cout << "Those who do not successfully complete it are liabilities to "
 		        "our organization." << endl;
-		cout << "Perhaps you may serve HYDRA in your next life." << endl;
+		cout << "Perhaps you may serve Hydra in your next life." << endl;
 		cout << "\n\n\nDo you have any last words before we begin?" << endl;
-		cout <<
-		     "********************************************************************************"
-		     << endl;
 	}
+	cout <<
+	     "********************************************************************************"
+	     << endl;
 }
 
 void Game::updateBoard() {
+	// Place the user's * on map depending on the new room
 	if (current->getName() == "study") {
 		map->placeStudy();
 	}
@@ -301,6 +290,7 @@ void Game::commitMurder() {
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
 	cout << "Your options are: " << endl;
 
+	// Print weapons in the satchel
 	satchel->printWeapons();
 
 	cout << "Type your weapon of choice exactly as printed above." << endl;
@@ -308,7 +298,9 @@ void Game::commitMurder() {
 
 	cout << "\nYou advance towards Mr. Boddy, " << weaponChoice << " in hand."
 																				  << endl;
-	cout << "He looks up at the last moment -- but it's too late." << endl;
+	cout << "He smiles at you. \"Peter! It's been a long time.\"" << endl;
+	cout << "You do not hesitate." << endl;
+	cout << "After all, Hydra is counting on you." << endl;
 
 	if (weaponChoice == "pipe") {
 	cout << "You have murdered Mr. Boddy, with the lead " <<
@@ -384,7 +376,7 @@ Game::~Game() {
 	delete satchel;
 	delete map;
 
-	// Delete all rooms
+	// Free memory for all rooms
 	delete study;
 	delete library;
 	delete billiards;
@@ -394,8 +386,4 @@ Game::~Game() {
 	delete dining;
 	delete lounge;
 	delete hall;
-
 }
-
-
-

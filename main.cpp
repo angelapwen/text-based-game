@@ -6,6 +6,8 @@
 *******************************************************************************/
 
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "game.hpp"
 
 using std::cin;
@@ -15,9 +17,14 @@ using std::endl;
 int intValidation (int min, int max);
 
 int main() {
+	// Set a random generator seed
+	// Referenced from Program 3-32 of C++ Early Objects, 9th Edition
+	unsigned seed;
+
+	seed = static_cast<unsigned>(time(0));
+	srand(seed);
 
 	Game game;
-	game.welcomeMenu();
 	game.startGame();
 
 	int repeatChoice = 0;
@@ -29,7 +36,6 @@ int main() {
 		switch(repeatChoice) {
 			case 1: {
 				Game repeatGame;
-				repeatGame.welcomeMenu();
 				repeatGame.startGame();
 				break;
 			}

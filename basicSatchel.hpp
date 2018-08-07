@@ -26,32 +26,14 @@ public:
 	basicSatchel();
 	void addWeapon(std::string weapon) override;
 
-	bool getKnife() const override{
-		return knife;
-	}
-
-	bool getRope() const override {
-		return rope;
-	}
-
-	bool getRevolver() const override {
-		return revolver;
-	}
-
-	bool getWrench() const override {
-		return wrench;
-	}
-
-	bool getCandlestick() const override {
-		return candlestick;
-	}
-
-	bool getPipe() const override{
-		return pipe;
-	}
+	bool getKnife() const override;
+	bool getRope() const override;
+	bool getRevolver() const override;
+	bool getWrench() const override;
+	bool getCandlestick() const override;
+	bool getPipe() const override;
 
 	int getNumUniqueWeapons() const override;
-
 	void printWeapons() const override;
 
 };

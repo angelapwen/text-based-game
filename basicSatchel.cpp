@@ -127,3 +127,27 @@ void basicSatchel::printWeapons() const {
 		cout << "- pipe" << endl;
 	}
 }
+
+bool basicSatchel::getCandlestick() const {
+	return candlestick;
+}
+
+bool basicSatchel::getRope() const {
+	return rope;
+}
+
+bool basicSatchel::getRevolver() const {
+	return revolver;
+}
+
+bool basicSatchel::getPipe() const {
+	return pipe;
+}
+
+bool basicSatchel::getKnife() const {
+	return knife;
+}
+
+bool basicSatchel::getWrench() const {
+	return wrench;
+}

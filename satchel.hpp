@@ -9,50 +9,32 @@
 #define SATCHEL_HPP
 
 #include <string>
-#include <iostream>
 
 class Satchel {
-private:
-	bool knife;
-	bool rope;
-	bool revolver;
-	bool wrench;
-	bool candlestick;
-	bool pipe;
-
-	int totalWeapons;
-
+protected:
+	int capacity;
+	int numTotalWeapons;
+	int numUniqueWeapons;
 public:
 	Satchel();
-	void addWeapon(std::string weapon);
 
-	bool getKnife() const {
-		return knife;
-	}
+	explicit Satchel(int capacityIn);
 
-	bool getRope() const {
-		return rope;
-	}
+	virtual void addWeapon(std::string weapon) = 0;
 
-	bool getRevolver() const {
-		return revolver;
-	}
+	// virtual int getNumTotalWeapons() const = 0;
+	virtual int getNumUniqueWeapons() const = 0;
 
-	bool getWrench() const {
-		return wrench;
-	}
+	virtual void printWeapons() const = 0;
 
-	bool getCandlestick() const {
-		return candlestick;
-	}
+	virtual bool getKnife() const = 0;
+	virtual bool getWrench() const = 0;
+	virtual bool getCandlestick() const = 0;
+	virtual bool getRope() const = 0;
+	virtual bool getPipe() const = 0;
+	virtual bool getRevolver() const = 0;
 
-	bool getPipe() const{
-		return pipe;
-	}
-
-	int getTotalWeapons() const;
-
-	void printWeapons() const;
+	virtual ~Satchel() = default;
 
 };
 

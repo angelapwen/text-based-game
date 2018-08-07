@@ -22,10 +22,10 @@ Map::Map() {
 	string row16 = "|  LIBRARY    |                        |----------------|\n";
 	string row15 = "|             |                        |                |\n";
 	string row14 = "|            _|                        |                |\n";
-	string row13 = "|-----------|       ~~~~~~~~~~~~       |                |\n";
-	string row12 = "|                   BODDY ESTATE       |     DINING     |\n";
-	string row11 = "|------------|       FLOOR PLAN        |      ROOM      |\n";
-	string row10 = "|            |      ~~~~~~~~~~~~       |                |\n";
+	string row13 = "|-----------|        ~~~~~~~~~~~~      |                |\n";
+	string row12 = "|                    BODDY ESTATE      |     DINING     |\n";
+	string row11 = "|------------|        FLOOR PLAN       |      ROOM      |\n";
+	string row10 = "|            |       ~~~~~~~~~~~~      |                |\n";
 	string row09 = "|  BILLIARD  |                         |---|            |\n";
 	string row08 = "|    ROOM    |                             |------------|\n";
 	string row07 = "|------------|                                          |\n";

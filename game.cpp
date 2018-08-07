@@ -17,7 +17,7 @@ using std::cin;
 int TOTAL_MOVES = 100;
 
 Game::Game() {
-	satchel = new Satchel();
+	satchel = new basicSatchel();
 	map = new Map();
 	steps = 0;
 	murder = false;
@@ -26,9 +26,9 @@ Game::Game() {
 	study = new Quiet("study","candlestick","a book of meditation");
 	library = new Quiet("library", "rope", "a box of sleeping pills");
 	conservatory = new Quiet("conservatory", "knife", "a pair of earmuffs");
-	billiards = new Entertain("billiard room", "lead pipe", "darts");
-	ballroom = new Entertain("ballroom", "rope", "record player");
-	hall = new Entertain("hall", "wrench", "doorbell");
+	billiards = new Entertain("billiard room", "lead pipe", "a game of darts");
+	ballroom = new Entertain("ballroom", "rope", "a record player");
+	hall = new Entertain("hall", "wrench", "a doorbell");
 	kitchen = new Eat("kitchen", "knife", "an apple");
 	dining = new Eat("dining room", "revolver", "a pumpkin pastry");
 	lounge = new Eat("lounge", "candlestick", "a block of cheese");
@@ -91,7 +91,7 @@ void Game::welcomeMenu() const {
 			"\nprior to the party." << endl;
 	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
-	cout << "\nTo complete your mision, you will need to:" << endl;
+	cout << "\nTo complete your mission, you will need to:" << endl;
 	cout << "1. Walk around the mansion and interact with the rooms.";
 	cout << " You begin in the library." << endl;
 	cout << "2. If your interactions go well, you will pick up weapons for "
@@ -137,7 +137,7 @@ void Game::startGame() {
 		map->printBoard();
 
 		// First check if player has enough weapons and is in the Billiards Room
-		if ((satchel->getTotalWeapons()) > 3 && current->getName() == "billiard "
+		if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() == "billiard "
 																				  "room") {
 			current->roomWelcome();
 			commitMurder();
@@ -154,7 +154,7 @@ void Game::startGame() {
 			satchel->addWeapon(weapon);
 
 			// Check again if player has enough weapons and is in Billiards Room
-			if ((satchel->getTotalWeapons()) > 3 && current->getName() ==
+			if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() ==
 			                                      "billiard room") {
 				commitMurder();
 			}
@@ -209,10 +209,10 @@ void Game::startGame() {
 		cout << "Open the door and step in to your freedom." << endl;
 		cout << "\n\nYour second mission:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
-			 "murder." << endl;
+			 "MUDER." << endl;
 		cout << "The others will be here soon..." << endl;
 		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
-			 "place.";
+			 "place." << endl;
 		cout <<
 		     "********************************************************************************"
 		     << endl;
@@ -310,8 +310,14 @@ void Game::commitMurder() {
 																				  << endl;
 	cout << "He looks up at the last moment -- but it's too late." << endl;
 
-	cout << "You have successfully murdered Mr. Boddy, with the " << weaponChoice
-	      << ",\nin the Billiard Room." << endl;
+	if (weaponChoice == "pipe") {
+	cout << "You have murdered Mr. Boddy, with the lead " <<
+	     weaponChoice << ", in the Billiard Room." << endl;
+	}
+	else {
+		cout << "You have murdered Mr. Boddy, with the " <<
+		     weaponChoice << ", in the Billiard Room." << endl;
+	}
 
 	murder = true;
 }
@@ -325,11 +331,11 @@ string Game::weaponValidation() const {
 
 	while (!hasWeapon) {
 		cout << "\nMake your choice: ";
-		getline(cin, input);
+		cin >> input;
 
 		// While input is not a valid weapon name, ask user to try again
 		while (input != "knife" && input != "revolver" && input != "rope" && input
-		       !="wrench" && input != "candlestick" && input != "lead pipe") {
+		       !="wrench" && input != "candlestick" && input != "pipe") {
 			cout << "Input must be a valid weapon name." << endl;
 			cout << "Please try again: ";
 			cin.clear();
@@ -343,15 +349,20 @@ string Game::weaponValidation() const {
 		// If input is a valid weapon, check to see if satchel contains this weapon
 		if (input == "knife" && !satchel->getKnife()) {
 			cout << "You do not carry a knife in your satchel. Try again.";
-		} else if (input == "revolver" && !satchel->getRevolver()) {
+		}
+		else if (input == "revolver" && !satchel->getRevolver()) {
 			cout << "You do not carry a revolver in your satchel. Try again.";
-		} else if (input == "rope" && !satchel->getRope()) {
+		}
+		else if (input == "rope" && !satchel->getRope()) {
 			cout << "You do not carry a rope in your satchel. Try again.";
-		} else if (input == "wrench" && !satchel->getWrench()) {
+		}
+		else if (input == "wrench" && !satchel->getWrench()) {
 			cout << "You do not carry a wrench in your satchel. Try again.";
-		} else if (input == "candlestick" && !satchel->getCandlestick()) {
+		}
+		else if (input == "candlestick" && !satchel->getCandlestick()) {
 			cout << "You do not carry a knife in your satchel. Try again.";
-		} else if (input == "lead pipe" && !satchel->getPipe()) {
+		}
+		else if (input == "pipe" && !satchel->getPipe()) {
 			cout << "You do not carry a lead pipe in your satchel. Try again.";
 		}
 			// Else the satchel contains the weapon

@@ -11,7 +11,7 @@
 #include "quiet.hpp"
 #include "eat.hpp"
 #include "entertain.hpp"
-#include "satchel.hpp"
+#include "basicSatchel.hpp"
 #include "map.hpp"
 
 class Game {

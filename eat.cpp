@@ -21,7 +21,7 @@ Eat::Eat(string nameIn, string weaponIn, string foodIn) : Space(nameIn, weaponIn
 }
 
 string Eat::action() {
-	cout << "You have come across" << foodItem << "." << endl;
+	cout << "You have come across " << foodItem << "." << endl;
 	cout << "What would you like to do?" << endl;
 	cout << "1. Do nothing. Food only slows you down." << endl;
 	cout << "2. Eat it. This may be your last meal." << endl;

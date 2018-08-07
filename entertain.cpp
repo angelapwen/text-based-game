@@ -23,10 +23,10 @@ Entertain::Entertain(string nameIn, string weaponIn, string gameIn) :
 }
 
 string Entertain::action() {
-	cout << "You have come across" << gameItem << "." << endl;
+	cout << "You have come across " << gameItem << "." << endl;
 	cout << "What would you like to do?" << endl;
 	cout << "1. Do nothing." << endl;
-	cout << "2. Play the " << gameItem << "." << endl;
+	cout << "2. Play " << gameItem << "." << endl;
 
 	return Space::action();
 }

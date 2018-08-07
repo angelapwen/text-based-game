@@ -103,74 +103,52 @@ char Space::makeMove() const {
 }
 
 /*******************************************************************************
- * UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED
-*******************************************************************************/
 
+ *******************************************************************************/
 string Space::moveValidation() const{
-	cout << "\nMake your choice: ";
-
 	string input;
-	cin >> input;
 
-	// bool isNull = true;
+	bool isNull = true; // Bool flag to break loop when input is valid
 
-	// Need to make this so it checks both the input AND to see if it is
-			// nullptr or not. Right now if it is == a correct direction, skips
-					// loop
+	while(isNull) {
+		cout << "\nMake your choice: ";
+		cin >> input;
 
-	// Try again if input is not one of the directions
-	while (input != "Top" && input != "Bottom" && input != "Left" && input !=
-	"Right" && input != "Corner" && input !=  "Exit") {
-		cout << "Input must be a valid direction for this room." << endl;
-		cout << "Please try again: ";
+		// Try again if input is not one of the directions
+		while (input != "Top" && input != "Bottom" && input != "Left" && input !=
+	          "Right" && input != "Corner" && input != "Exit") {
+			cout << "Input must be a valid direction for this room." << endl;
+			cout << "Please try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> input;
+		}
+
 		cin.clear();
 		cin.ignore(256, '\n');
-		cin >> input;
+
+		// Check if direction input points to nullpointer
+		if (input == "Top" && top == nullptr) {
+			cout << "Top does not lead anywhere. Try again.";
+		}
+		else if (input == "Bottom" && bottom == nullptr) {
+			cout << "Bottom does not lead anywhere. Try again.";
+		}
+		else if (input == "Left" && left == nullptr) {
+			cout << "Left does not lead anywhere. Try again.";
+		}
+		else if (input == "Right" && right == nullptr) {
+			cout << "Right does not lead anywhere. Try again.";
+		}
+		else if (input == "Corner" && corner == nullptr) {
+			cout << "Corner does not lead anywhere. Try again.";
+		}
+		// If it doesn't point to nullptr, break loop
+		else {
+			isNull = false;
+		}
 	}
-
-	cin.clear();
-	cin.ignore(256, '\n');
-
-	// If input is a valid direction, check to see if it points to nullptr
-	if (input == "Top" && top == nullptr) {
-		// if not, call moveValidation function recursively.
-		cout << "Top does not lead anywhere. Try again.";
-		input = moveValidation();
-	}
-
-	// Bad instruction exception thrown after recursion called
-		// If you choose initially correctly it's okay; after calling recursively
-		// correct string is input to "input" but then the same if loop repeats
-		// Exception thrown
-
-	else if (input == "Bottom" && bottom == nullptr) {
-		// if not, call moveValidation function recursively.
-		cout << "Bottom does not lead anywhere. Try again.";
-		input = moveValidation();
-	}
-
-	else if (input == "Left" && left == nullptr) {
-		// if not, call moveValidation function recursively.
-		cout << "Left does not lead anywhere. Try again.";
-		input = moveValidation();
-	}
-
-	else if (input == "Right" && right == nullptr) {
-		// if not, call moveValidation function recursively.
-		cout << "Right does not lead anywhere. Try again.";
-		input = moveValidation();
-	}
-
-	else if (input == "Corner" && corner == nullptr) {
-		// if not, call moveValidation function recursively.
-		cout << "Corner does not lead anywhere. Try again.";
-		input = moveValidation();
-	}
-
-	// Else user chose a valid direction or Exit, can safely return
-	else {
-		return input;
-	}
+	return input;
 }
 
 Space* Space::getTop() {

@@ -72,29 +72,49 @@ void Game::welcomeMenu() const {
 	cout << "*****************************" << endl;
 	cout << "\nWelcome to Clue: The Prequel." << endl;
 	cout << "\n*****************************" << endl;
-	cout << "\nYou are inside Mr. Boddy's mansion before his party begins." <<
-	     endl;
-	cout << "You, Professor Plum, must murder Mr. Boddy tonight." << endl;
-	cout << "You will have 100 moves to complete your mission." << endl;
-	cout << "In order to complete your mission, you will need to: " << endl;
+	cout << "Good evening, Professor Plum." << endl;
+	cout << "We have received your application to join us at HYDRA." << endl;
+	cout << "We were pleased to hear of your interest, as we have been\n";
+	cout << "watching closely over your work in the past few years." << endl;
+	cout << "\nAs you know, we are an ancient Brotherhood." << endl;
+	cout << "All of our applicants are subject to a series of tests and "
+			"missions\nto test your true dedication to our organization." << endl;
+	cout << "\nTonight will be your first mission." << endl;
+	cout << "The brother of your late wife, Mr. John Boddy, has invited you to\n"
+			"his 30th birthday party." << endl;
+	cout << "As a member of the family, you have access to the Boddy estate "
+			"\nprior to the party." << endl;
+	cout << "\nYour mission:" << endl;
+	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
+	cout << "\nTo complete your mision, you will need to:" << endl;
 	cout << "1. Walk around the mansion and interact with the rooms." << endl;
 	cout << "2. If your interactions go well, you will pick up weapons for "
 			"your satchel." << endl;
 	cout << "Your satchel will only fit 5 weapons." << endl;
 	cout << "3. Once you have 4 unique weapons in your satchel, you must\n"
 			<< "find the appropriate room to commit the murder." << endl;
-	cout << "This room has a secret escape so you can leave undetected." << endl;
+	cout << "We have set up this room with a secret escape \nso you may leave "
+			"the scene of the crime undetected." << endl;
+
+	cout << "\nOne more thing: as you know, the Boddy Estate is vast." << endl;
+	cout << "It will take time for you to move between rooms to complete the "
+			"mission." << endl;
+	cout << "You will only have time for 100 moves between rooms \nto complete "
+			"your mission before the dinner party begins." << endl;
+
 	cout << "\nYou may choose to use the Emergency Exit at any point in the "
 			"game,\nalthough this means you will not have completed your mission"
 			"." << endl;
-	cout << "Good luck and happy killing..." << endl;
+	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
+	     endl;
+	cout << "Hail, Hydra!" << endl;
 }
 
 void Game::startGame() {
 	string weapon;
 	bool exit = false;
 
-	cout << "\nProfessor, you begin in the library." << endl;
+	cout << "\nYou begin in the library." << endl;
 
 	// Repeat these steps while the murder has not been committed, the user
 			// has not elected to exit, and step count is below max
@@ -111,7 +131,7 @@ void Game::startGame() {
 		map->printBoard();
 
 		// First check if player has enough weapons and is in the Billiards Room
-		if ((satchel->getTotalWeapons()) > 3 && current->getName() == "billiards "
+		if ((satchel->getTotalWeapons()) > 3 && current->getName() == "billiard "
 																				  "room") {
 			current->roomWelcome();
 			commitMurder();
@@ -129,7 +149,7 @@ void Game::startGame() {
 
 			// Check again if player has enough weapons and is in Billiards Room
 			if ((satchel->getTotalWeapons()) > 3 && current->getName() ==
-			                                      "billiards room") {
+			                                      "billiard room") {
 				commitMurder();
 			}
 		}
@@ -178,10 +198,14 @@ void Game::startGame() {
 		cout << "It took you " << steps << " steps to complete your mission." <<
 		     endl;
 		cout << "We have activated a secret escape in the grandfather clock\n";
-		cout << "across from you in the billiards room." << endl;
+		cout << "across from you in the billiard room." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
-		cout << "Be prepared to defend your innocence to your peers." << endl;
-		cout << "They will be here soon..." << endl;
+		cout << "\n\nYour second mission:" << endl;
+		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
+			 "murder." << endl;
+		cout << "The others will be here soon..." << endl;
+		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
+			 "place.";
 		cout << "**************************************************************"
 		     << endl;
 	}
@@ -191,11 +215,15 @@ void Game::startGame() {
 	else if (steps >= TOTALMOVES) {
 		cout << "\n**************************************************************"
 		     << endl;
-		cout << "Unfortunately you exceeded the total number of steps to complete "
-			 << "your mission." << endl;
-		cout << "We have removed you from Mr. Boddy's mansion for your own "
-			 "safety." << endl;
-		cout << "Thank you for playing and better luck next time!" << endl;
+		cout << "Unfortunately, you exceeded the total number of moves to "
+				  "complete your mission." << endl;
+		cout << "We have removed you from Mr. Boddy's mansion." << endl;
+		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
+		cout << "The HYDRA selection process is a dangerous one." << endl;
+		cout << "Those who do not successfully complete it are liabilities to "
+			 "our organization." << endl;
+		cout << "Perhaps you may serve HYDRA in your next life." << endl;
+		cout << "\n\n\nDo you have any last words before we begin?" << endl;
 		cout << "**************************************************************"
 		     << endl;
 	 }
@@ -206,9 +234,13 @@ void Game::startGame() {
 		     << endl;
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
 		     " steps." << endl;
-		cout << "You were not able to complete your mission." << endl;
-		cout << "Thank you for playing." << endl;
-		cout << "Perhaps next time you will be more dedicated to the mission." << endl;
+		cout << "You chose not to complete your mission." << endl;
+		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
+		cout << "The HYDRA selection process is a dangerous one." << endl;
+		cout << "Those who do not successfully complete it are liabilities to "
+		        "our organization." << endl;
+		cout << "Perhaps you may serve HYDRA in your next life." << endl;
+		cout << "\n\n\nDo you have any last words before we begin?" << endl;
 		cout << "**************************************************************"
 		     << endl;
 	}
@@ -224,7 +256,7 @@ void Game::updateBoard() {
 	else if (current->getName() == "conservatory") {
 		map->placeConservatory();
 	}
-	else if (current->getName() == "billiards room") {
+	else if (current->getName() == "billiard room") {
 		map->placeBilliards();
 	}
 	else if (current->getName() == "dining room") {
@@ -245,14 +277,14 @@ void Game::updateBoard() {
 	else {
 		cout << "Invalid room name." << endl;
 	}
-
 }
 
 void Game::commitMurder() {
 	string weaponChoice;
 
 	cout << "Mr. Boddy has entered the billiard room." << endl;
-	cout << "You have successfully collected at least four weapons." << endl;
+	cout << "You have successfully collected at least four unique weapons." <<
+	     endl;
 	cout << "This is your opportunity to murder him and flee the scene!" << endl;
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
 	cout << "Your options are: " << endl;
@@ -267,7 +299,7 @@ void Game::commitMurder() {
 	cout << "He looks up at the last moment -- but it's too late." << endl;
 
 	cout << "You have successfully murdered Mr. Boddy, with the " << weaponChoice
-	      << ",\nin the Billiards Room." << endl;
+	      << ",\nin the Billiard Room." << endl;
 
 	murder = true;
 }
@@ -276,63 +308,45 @@ void Game::commitMurder() {
  * UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED
 *******************************************************************************/
 string Game::weaponValidation() const {
-
-	cout << "\nMake your choice: ";
-
 	string input;
-	getline(cin, input);
+	bool hasWeapon = false;
 
-	// While input is not a valid weapon name, ask user to try again
-	while (input != "knife" && input != "revolver" && input!= "rope" && input
-	       != "wrench" && input != "candlestick" && input != "lead pipe") {
-		cout << "Input must be a valid weapon name." << endl;
-		cout << "Please try again: ";
+	while (!hasWeapon) {
+		cout << "\nMake your choice: ";
+		getline(cin, input);
+
+		// While input is not a valid weapon name, ask user to try again
+		while (input != "knife" && input != "revolver" && input != "rope" && input
+		       !="wrench" && input != "candlestick" && input != "lead pipe") {
+			cout << "Input must be a valid weapon name." << endl;
+			cout << "Please try again: ";
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> input;
+		}
+
 		cin.clear();
 		cin.ignore(256, '\n');
-		cin >> input;
+
+		// If input is a valid weapon, check to see if satchel contains this weapon
+		if (input == "knife" && !satchel->getKnife()) {
+			cout << "You do not carry a knife in your satchel. Try again.";
+		} else if (input == "revolver" && !satchel->getRevolver()) {
+			cout << "You do not carry a revolver in your satchel. Try again.";
+		} else if (input == "rope" && !satchel->getRope()) {
+			cout << "You do not carry a rope in your satchel. Try again.";
+		} else if (input == "wrench" && !satchel->getWrench()) {
+			cout << "You do not carry a wrench in your satchel. Try again.";
+		} else if (input == "candlestick" && !satchel->getCandlestick()) {
+			cout << "You do not carry a knife in your satchel. Try again.";
+		} else if (input == "lead pipe" && !satchel->getPipe()) {
+			cout << "You do not carry a lead pipe in your satchel. Try again.";
+		}
+			// Else the satchel contains the weapon
+		else {
+			hasWeapon = true;
+		}
 	}
-
-	// If input is a valid weapon, check to see if satchel contains this weapon
-	if (input == "knife" && !satchel->getKnife()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a knife in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	else if (input == "revolver" && !satchel->getRevolver()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a revolver in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	else if (input == "rope" && !satchel->getRope()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a rope in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	else if (input == "wrench" && !satchel->getWrench()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a wrench in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	else if (input == "candlestick" && !satchel->getCandlestick()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a knife in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	else if (input == "lead pipe" && !satchel->getPipe()) {
-		// if not, call weaponValidation function recursively.
-		cout << "You do not carry a lead pipe in your satchel. Try again.";
-		input = weaponValidation();
-	}
-
-	// Flush buffer after successful input
-	cin.clear();
-	cin.ignore(256, '\n');
-
 	return input;
 }
 

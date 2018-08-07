@@ -127,7 +127,7 @@ string Space::moveValidation() const{
 		cin.clear();
 		cin.ignore(256, '\n');
 
-		// Check if direction input points to nullpointer
+		// Check if direction input points to nullptr
 		if (input == "Top" && top == nullptr) {
 			cout << "Top does not lead anywhere. Try again.";
 		}

@@ -22,11 +22,11 @@ Map::Map() {
 	string row16 = "|  LIBRARY    |                        |----------------|\n";
 	string row15 = "|             |                        |                |\n";
 	string row14 = "|            _|                        |                |\n";
-	string row13 = "|-----------|                          |                |\n";
-	string row12 = "|                                      |     DINING     |\n";
-	string row11 = "|------------|                         |      ROOM      |\n";
-	string row10 = "|            |                         |                |\n";
-	string row09 = "|  BILLIARD  |                         |----            |\n";
+	string row13 = "|-----------|       ~~~~~~~~~~~~       |                |\n";
+	string row12 = "|                   BODDY ESTATE       |     DINING     |\n";
+	string row11 = "|------------|       FLOOR PLAN        |      ROOM      |\n";
+	string row10 = "|            |      ~~~~~~~~~~~~       |                |\n";
+	string row09 = "|  BILLIARD  |                         |---|            |\n";
 	string row08 = "|    ROOM    |                             |------------|\n";
 	string row07 = "|------------|                                          |\n";
 	string row06 = "|                  |------------------|                 |\n";
@@ -34,7 +34,7 @@ Map::Map() {
 	string row04 = "|-----------|_     |                  |   |             |\n";
 	string row03 = "|            |     |     BALLROOM     |   |             |\n";
 	string row02 = "|CONSERVATORY|     |                  |   |   KITCHEN   |\n";
-	string row01 = "|            |     ---|            |---   |             |\n";
+	string row01 = "|            |     |--|            |--|   |             |\n";
 	string row00 = "|-------------------------------------------------------|\n";
 
 	// Fill the board with strings
@@ -133,6 +133,6 @@ void Map::printBoard() {
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << "KEY: * YOU ARE HERE" << std::endl;
+	std::cout << "\t\t\t\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
 }
 

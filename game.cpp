@@ -14,7 +14,7 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-int TOTALMOVES = 100;
+int TOTAL_MOVES = 100;
 
 Game::Game() {
 	satchel = new Satchel();
@@ -69,42 +69,49 @@ Game::Game() {
 }
 
 void Game::welcomeMenu() const {
-	cout << "*****************************" << endl;
-	cout << "\nWelcome to Clue: The Prequel." << endl;
-	cout << "\n*****************************" << endl;
-	cout << "Good evening, Professor Plum." << endl;
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
+
+	cout << "\n\t\t\t\t\t\t\t   Clue: The Prequel" << endl;
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
+	cout << "\nGood evening, Professor Plum." << endl;
 	cout << "We have received your application to join us at HYDRA." << endl;
-	cout << "We were pleased to hear of your interest, as we have been\n";
-	cout << "watching closely over your work in the past few years." << endl;
+	cout << "We were pleased to hear of your interest, as we have been ";
+	cout << "watching closely over\nyour work in the past few years." << endl;
 	cout << "\nAs you know, we are an ancient Brotherhood." << endl;
 	cout << "All of our applicants are subject to a series of tests and "
-			"missions\nto test your true dedication to our organization." << endl;
-	cout << "\nTonight will be your first mission." << endl;
-	cout << "The brother of your late wife, Mr. John Boddy, has invited you to\n"
-			"his 30th birthday party." << endl;
-	cout << "As a member of the family, you have access to the Boddy estate "
+			"missions to test your\ntrue dedication to our organization.";
+	cout << " Tonight will be your first mission." << endl;
+	cout << "\nThe brother of your late wife, Mr. John Boddy, has invited you "
+			"to his 30th\nbirthday party.";
+	cout << " As a member of the family, you have access to the Boddy estate "
 			"\nprior to the party." << endl;
-	cout << "\nYour mission:" << endl;
+	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
 	cout << "\nTo complete your mision, you will need to:" << endl;
-	cout << "1. Walk around the mansion and interact with the rooms." << endl;
+	cout << "1. Walk around the mansion and interact with the rooms.";
+	cout << " You begin in the library." << endl;
 	cout << "2. If your interactions go well, you will pick up weapons for "
 			"your satchel." << endl;
 	cout << "Your satchel will only fit 5 weapons." << endl;
-	cout << "3. Once you have 4 unique weapons in your satchel, you must\n"
-			<< "find the appropriate room to commit the murder." << endl;
-	cout << "We have set up this room with a secret escape \nso you may leave "
+	cout << "3. Once you have 4 unique weapons in your satchel, you must "
+			<< "find the appropriate\nroom in which to commit the murder.";
+	cout << " We have set up this room with a secret\nescape so you may leave "
 			"the scene of the crime undetected." << endl;
 
 	cout << "\nOne more thing: as you know, the Boddy Estate is vast." << endl;
 	cout << "It will take time for you to move between rooms to complete the "
 			"mission." << endl;
-	cout << "You will only have time for 100 moves between rooms \nto complete "
-			"your mission before the dinner party begins." << endl;
+	cout << "You will only have time for " << TOTAL_MOVES << " moves between "
+			"rooms to complete your mission\nbefore the dinner party begins." <<
+	     endl;
 
 	cout << "\nYou may choose to use the Emergency Exit at any point in the "
-			"game,\nalthough this means you will not have completed your mission"
-			"." << endl;
+			"game, although\nthis means you will not have completed your mission"
+			" and have failed HYDRA." << endl;
 	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
 	     endl;
 	cout << "Hail, Hydra!" << endl;
@@ -114,16 +121,15 @@ void Game::startGame() {
 	string weapon;
 	bool exit = false;
 
-	cout << "\nYou begin in the library." << endl;
-
 	// Repeat these steps while the murder has not been committed, the user
 			// has not elected to exit, and step count is below max
-	while (steps < TOTALMOVES && !murder && !exit) {
+	while (steps < TOTAL_MOVES && !murder && !exit) {
 		// Increment and print the step number
 		steps++;
 
-		cout << "\n**************************************************************"
-			 << endl;
+		cout <<
+		     "\n********************************************************************************"
+		     << endl;
 		cout << "You are on Move #" << steps << "." << endl;
 
 		// Move player to correct place and print board
@@ -191,7 +197,8 @@ void Game::startGame() {
 	// If murder has been committed, display congratulations and allow user to
 	// escape
 	if (murder) {
-		cout << "\n**************************************************************"
+		cout <<
+		     "\n********************************************************************************"
 		     << endl;
 		cout << "Congratulations, professor! You have completed your mission." <<
 		     endl;
@@ -206,14 +213,16 @@ void Game::startGame() {
 		cout << "The others will be here soon..." << endl;
 		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
 			 "place.";
-		cout << "**************************************************************"
+		cout <<
+		     "********************************************************************************"
 		     << endl;
 	}
 
 		// Else if user reached max number of steps, tell user sorry and maybe they
 		// will be a better murderer next time
-	else if (steps >= TOTALMOVES) {
-		cout << "\n**************************************************************"
+	else if (steps >= TOTAL_MOVES) {
+		cout <<
+		     "\n********************************************************************************"
 		     << endl;
 		cout << "Unfortunately, you exceeded the total number of moves to "
 				  "complete your mission." << endl;
@@ -224,13 +233,15 @@ void Game::startGame() {
 			 "our organization." << endl;
 		cout << "Perhaps you may serve HYDRA in your next life." << endl;
 		cout << "\n\n\nDo you have any last words before we begin?" << endl;
-		cout << "**************************************************************"
+		cout <<
+		     "********************************************************************************"
 		     << endl;
 	 }
 
 	// Else user has elected to exit, thank user for playing
 	else {
-		cout << "\n**************************************************************"
+		cout <<
+		     "\n********************************************************************************"
 		     << endl;
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
 		     " steps." << endl;
@@ -241,7 +252,8 @@ void Game::startGame() {
 		        "our organization." << endl;
 		cout << "Perhaps you may serve HYDRA in your next life." << endl;
 		cout << "\n\n\nDo you have any last words before we begin?" << endl;
-		cout << "**************************************************************"
+		cout <<
+		     "********************************************************************************"
 		     << endl;
 	}
 }
@@ -305,8 +317,8 @@ void Game::commitMurder() {
 }
 
 /*******************************************************************************
- * UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED UNFINISHED
-*******************************************************************************/
+
+ *******************************************************************************/
 string Game::weaponValidation() const {
 	string input;
 	bool hasWeapon = false;

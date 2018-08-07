@@ -12,6 +12,7 @@
 #include "eat.hpp"
 #include "entertain.hpp"
 #include "basicSatchel.hpp"
+#include "vectorSatchel.hpp"
 #include "map.hpp"
 
 #include <string>
@@ -42,6 +43,9 @@ public:
 	void welcomeMenu() const;
 
 	void startGame();
+	void satchelChoice();
+
+	int intValidation(int min, int max);
 
 	void updateBoard();
 

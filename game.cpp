@@ -16,7 +16,7 @@ using std::cin;
 const int TOTAL_MOVES = 100;
 
 Game::Game() {
-	satchel = new basicSatchel();
+	satchel = nullptr;
 	map = new Map();
 	steps = 0;
 	murder = false;
@@ -25,7 +25,7 @@ Game::Game() {
 	study = new Quiet("study","candlestick","a book of meditation");
 	library = new Quiet("library", "rope", "a box of sleeping pills");
 	conservatory = new Quiet("conservatory", "knife", "a pair of earmuffs");
-	billiards = new Entertain("billiard room", "lead pipe", "a game of darts");
+	billiards = new Entertain("billiard room", "pipe", "a game of darts");
 	ballroom = new Entertain("ballroom", "rope", "a record player");
 	hall = new Entertain("hall", "wrench", "a doorbell");
 	kitchen = new Eat("kitchen", "knife", "an apple");
@@ -91,11 +91,10 @@ void Game::welcomeMenu() const {
 	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
 	cout << "\nTo complete your mission, you will need to:" << endl;
-	cout << "1. Walk around the mansion and interact with the rooms.";
+	cout << "1. Walk around the estate and interact with the rooms.";
 	cout << " You begin in the library." << endl;
 	cout << "2. If your interactions go well, you will pick up weapons for "
 			"your satchel." << endl;
-	cout << "Your satchel will only fit 5 weapons." << endl;
 	cout << "3. Once you have 4 unique weapons in your satchel, you must "
 			<< "find the appropriate\nroom in which to commit the murder.";
 	cout << " We have set up this room with a secret\nescape so you may leave "
@@ -114,14 +113,15 @@ void Game::welcomeMenu() const {
 	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
 	     endl;
 	cout << "Hail, Hydra!" << endl;
-	cout << "\nPress enter to acknowledge you have received and understood "
-			"your mission."	<< endl;
-	string temp;
-	getline(cin, temp);
-
+	cout << "\nPress enter to accept your mission."	<< endl;
+	getchar();
 }
 
 void Game::startGame() {
+	welcomeMenu();
+
+	satchelChoice();
+
 	string weapon;
 	bool exit = false;
 
@@ -233,7 +233,7 @@ void Game::startGame() {
 	else {
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
 		     " steps." << endl;
-		cout << "You chose not to complete your mission." << endl;
+		cout << "You decided to leave your mission incomplete." << endl;
 		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
 		cout << "The HYDRA selection process is a dangerous one." << endl;
 		cout << "Those who do not successfully complete it are liabilities to "
@@ -244,6 +244,60 @@ void Game::startGame() {
 	cout <<
 	     "********************************************************************************"
 	     << endl;
+}
+
+void Game::satchelChoice() {
+	cout <<
+	     "********************************************************************************"
+	     << endl;
+	cout << "It is time to choose your satchel." << endl;
+	cout << "Should you succeed in your missions, your placement in Hydra will"
+			" depend upon\nyour demonstrated abilities and desire to challenge "
+			"yourself."	<< endl;
+	cout << "\nThe first satchel will provide you with the highest chance "
+			"of success." << endl;
+	cout << "It will only allow weapons that it does not already contain to be "
+			"placed inside." << endl;
+	cout << "Its capacity is 4 weapons. Once you fill it, you may proceed "
+			"directly to find\nthe room with the secret escape." << endl;
+	cout << "\nThe second satchel will provide you with a moderate "
+			"chance of success." << endl;
+	cout << "It has a capacity of 5 weapons." << endl;
+	cout << "It will allow you to add repeated weapons into the bag." << endl;
+	cout << "Once you reach capacity and attempt to add more weapons, it will "
+			"choose a random\nweapon to drop before adding the new weapon." <<
+	     endl;
+	cout << "With this satchel, you will need to keep track of its contents so"
+			" that you have\n4 unique weapons to be able to commit the murder."
+	<< endl;
+	cout << "\n\tSATCHEL MENU" << endl;
+	cout << "1. Satchel 1 (Easy)" << endl;
+	cout << "2. Satchel 2 (Hard)" << endl;
+	cout << "Make your choice: ";
+
+	int satchelChoice = intValidation(1,2);
+
+	switch (satchelChoice) {
+		case 1: {
+			satchel = new basicSatchel;
+			cout << "\nYou have selected the Easy Satchel." << endl;
+			cout << "We hope that next time, you will challenge yourself further."
+			  << endl;
+			break;
+		}
+		case 2: {
+			satchel = new vectorSatchel;
+			cout << "\nYou have selected the Hard Satchel." << endl;
+			cout << "The road to success will be long, but, should you succeed, "
+			  "you will be rewarded\nbeyond your wildest dreams." << endl;
+			break;
+		}
+		default:
+			break;
+	}
+
+	cout << "\nPress enter to take your satchel and begin your mission."	<< endl;
+	getchar();
 }
 
 void Game::updateBoard() {
@@ -366,8 +420,8 @@ string Game::weaponValidation() const {
 }
 
 void Game::repeatMenu() const {
-	cout << "\n\n\n PLAY AGAIN?" << endl;
-	cout << "1. Play a new game." << endl;
+	cout << "\n\t PLAY AGAIN?" << endl;
+	cout << "1. Try your hand at joining Hydra again." << endl;
 	cout << "2. Exit the program." << endl;
 	cout << "Make your choice: " << endl;
 }
@@ -386,4 +440,30 @@ Game::~Game() {
 	delete dining;
 	delete lounge;
 	delete hall;
+}
+
+/*******************************************************************************
+ * intValidation is a function with two int parameters that returns an int
+ * value. It prompts the user for input and validates the input to be an
+ * integer between the min and max parameters, and returns the valid value.
+*******************************************************************************/
+int Game::intValidation(int min, int max) {
+	int input;
+	cin >> input;
+
+	// Try again if input is out of range or fails
+	while (input < min || input > max || cin.fail()) {
+		cout << "Input must be an integer between " << min << " and "
+		     << max << "." << endl;
+		cout << "Please try again: ";
+		cin.clear();
+		cin.ignore(256, '\n');
+		cin >> input;
+	}
+
+	// Flush buffer after successful input
+	cin.clear();
+	cin.ignore(256, '\n');
+
+	return input;
 }

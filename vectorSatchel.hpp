@@ -5,18 +5,24 @@
  * Description:
 *******************************************************************************/
 
-#ifndef BASICSATCHEL_HPP
-#define BASICSATCHEL_HPP
+#ifndef VECTORSATCHEL_HPP
+#define VECTORSATCHEL_HPP
 
 #include "satchel.hpp"
+#include <vector>
+#include <algorithm>
+#include <cstdlib>
 
-class basicSatchel : public Satchel {
+class vectorSatchel: public Satchel {
 private:
-
+	std::vector<std::string> satchel;
 
 public:
-	basicSatchel();
+	vectorSatchel();
+
 	void addWeapon(std::string weapon) override;
+	void randomDrop();
+	void updateWeapons();
 
 	int getNumUniqueWeapons() override;
 
@@ -24,4 +30,4 @@ public:
 };
 
 
-#endif //BASICSATCHEL_HPP
+#endif //VECTORSATCHEL_HPP

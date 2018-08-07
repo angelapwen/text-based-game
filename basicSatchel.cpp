@@ -23,21 +23,19 @@ void basicSatchel::addWeapon(std::string weapon) {
 	}
 
 	else {
-
-		if (weapon == "none") {
-			return;
-		} else if ((weapon == "knife")) {
+		if ((weapon == "knife")) {
 			if (!knife) {
 				cout << "Congratulations! You have picked up a knife." << endl;
 				knife = true;
 				numUniqueWeapons++;
 			}
-				// Else user already had a knife
+			// Else user already had a knife
 			else {
 				cout << "You have picked up a knife, but your satchel already "
 				        "contained one, so you drop it." << endl;
 			}
-		} else if ((weapon == "rope")) {
+		}
+		else if ((weapon == "rope")) {
 			if (!rope) {
 				cout << "Congratulations! You have picked up a rope." << endl;
 				rope = true;
@@ -48,42 +46,46 @@ void basicSatchel::addWeapon(std::string weapon) {
 				cout << "You have picked up a rope, but your satchel already "
 				        "contained one, so you drop it." << endl;
 			}
-		} else if ((weapon == "wrench")) {
+		}
+		else if ((weapon == "wrench")) {
 			if (!wrench) {
 				cout << "Congratulations! You have picked up a wrench." << endl;
 				wrench = true;
 				numUniqueWeapons++;
 			}
-				// Else user already had a wrench
+			// Else user already had a wrench
 			else {
 				cout << "You have picked up a wrench, but your satchel already "
 				        "contained one, so you drop it." << endl;
 			}
-		} else if ((weapon == "revolver")) {
+		}
+		else if ((weapon == "revolver")) {
 			if (!revolver) {
 				cout << "Congratulations! You have picked up a revolver." << endl;
 				revolver = true;
 				numUniqueWeapons++;
 			}
-				// Else user already had a revolver
+			// Else user already had a revolver
 			else {
 				cout << "You have picked up a revolver, but your satchel already "
 				        "contained one, so you drop it." << endl;
 			}
-		} else if ((weapon == "candlestick")) {
+		}
+		else if ((weapon == "candlestick")) {
 			if (!candlestick) {
 				cout << "Congratulations! You have picked up a candlestick."
 				     << endl;
 				candlestick = true;
 				numUniqueWeapons++;
 			}
-				// Else user already had a candlestick
+			// Else user already had a candlestick
 			else {
 				cout
 						<< "You have picked up a candlestick, but your satchel already "
-						   "contained one,  so you drop it." << endl;
+						   "contained one, so you drop it." << endl;
 			}
-		} else if ((weapon == "lead pipe")) {
+		}
+		else if ((weapon == "pipe")) {
 			if (!pipe) {
 				cout << "Congratulations! You have picked up a lead pipe." << endl;
 				pipe = true;
@@ -92,7 +94,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 				// Else user already had a pipe
 			else {
 				cout << "You have picked up a lead pipe, but your satchel already "
-				        "contained one,  so you drop it." << endl;
+				        "contained one, so you drop it." << endl;
 			}
 		}
 

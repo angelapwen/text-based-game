@@ -155,7 +155,9 @@ void Game::startGame() {
 			weapon = current->action();
 
 			// Add weapon (if applicable) to satchel
-			satchel->addWeapon(weapon);
+			if (weapon != "none") {
+				satchel->addWeapon(weapon);
+			}
 
 			// Check again if player has enough weapons and is in Billiards Room
 			if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() ==
@@ -366,6 +368,9 @@ void Game::commitMurder() {
 	}
 
 	murder = true;
+
+	cout << "\nPress enter to continue." << endl;
+	getchar();
 }
 
 /*******************************************************************************

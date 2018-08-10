@@ -133,6 +133,6 @@ void Map::printBoard() {
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << "\t\t\t\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
+	std::cout << "\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
 }
 

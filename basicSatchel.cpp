@@ -32,7 +32,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 			// Else user already had a knife
 			else {
 				cout << "You have picked up a knife, but your satchel already "
-				        "contained one, so you drop it." << endl;
+				        "contained one." << endl;
 			}
 		}
 		else if ((weapon == "rope")) {
@@ -44,7 +44,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 				// Else user already had rope
 			else {
 				cout << "You have picked up a rope, but your satchel already "
-				        "contained one, so you drop it." << endl;
+				        "contained one." << endl;
 			}
 		}
 		else if ((weapon == "wrench")) {
@@ -56,7 +56,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 			// Else user already had a wrench
 			else {
 				cout << "You have picked up a wrench, but your satchel already "
-				        "contained one, so you drop it." << endl;
+				        "contained oned." << endl;
 			}
 		}
 		else if ((weapon == "revolver")) {
@@ -68,7 +68,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 			// Else user already had a revolver
 			else {
 				cout << "You have picked up a revolver, but your satchel already "
-				        "contained one, so you drop it." << endl;
+				        "contained one." << endl;
 			}
 		}
 		else if ((weapon == "candlestick")) {
@@ -82,7 +82,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 			else {
 				cout
 						<< "You have picked up a candlestick, but your satchel already "
-						   "contained one, so you drop it." << endl;
+						   "contained one." << endl;
 			}
 		}
 		else if ((weapon == "pipe")) {
@@ -94,7 +94,7 @@ void basicSatchel::addWeapon(std::string weapon) {
 				// Else user already had a pipe
 			else {
 				cout << "You have picked up a lead pipe, but your satchel already "
-				        "contained one, so you drop it." << endl;
+				        "contained one." << endl;
 			}
 		}
 

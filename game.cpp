@@ -301,7 +301,8 @@ void Game::satchelChoice() {
 		case 2: {
 			satchel = new vectorSatchel;
 			cout << "\nYou have selected the Silver Satchel." << endl;
-			cout << "We will be watching you closely. Good luck." << endl;
+			cout << "A safe choice. We will be watching you closely to assess "
+			  "your talent." << endl;
 			break;
 		}
 		case 3: {

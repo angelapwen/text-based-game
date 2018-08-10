@@ -11,13 +11,13 @@ using std::cout;
 using std::endl;
 
 Satchel::Satchel() {
-	capacity = numTotalWeapons = numUniqueWeapons = -1;
+	capacity = numUniqueWeapons = -1;
 	knife = rope = wrench = revolver = candlestick = pipe = false;
 }
 
 Satchel::Satchel(int capacityIn) {
 	capacity = capacityIn;
-	numTotalWeapons = numUniqueWeapons = 0;
+	numUniqueWeapons = 0;
 	knife = rope = wrench = revolver = candlestick = pipe = false;
 }
 

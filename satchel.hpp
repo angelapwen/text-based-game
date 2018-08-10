@@ -14,7 +14,6 @@
 class Satchel {
 protected:
 	int capacity;
-	int numTotalWeapons;
 	int numUniqueWeapons;
 
 	bool knife;
@@ -31,7 +30,6 @@ public:
 
 	virtual void addWeapon(std::string weapon) = 0;
 
-	// virtual int getNumTotalWeapons() const = 0;
 	virtual int getNumUniqueWeapons() = 0;
 
 	virtual void printWeapons() const = 0;

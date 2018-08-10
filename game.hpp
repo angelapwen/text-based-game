@@ -13,6 +13,7 @@
 #include "entertain.hpp"
 #include "basicSatchel.hpp"
 #include "vectorSatchel.hpp"
+#include "queueSatchel.hpp"
 #include "map.hpp"
 
 #include <string>

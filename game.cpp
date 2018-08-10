@@ -256,13 +256,13 @@ void Game::satchelChoice() {
 	cout << "Should you succeed in your missions, your placement in Hydra will"
 			" depend upon\nyour demonstrated abilities and desire to challenge "
 			"yourself."	<< endl;
-	cout << "\nThe first satchel will provide you with the highest chance "
+	cout << "\n- The Bronze Satchel will provide you with the highest chance "
 			"of success." << endl;
 	cout << "It will only allow weapons that it does not already contain to be "
 			"placed inside." << endl;
 	cout << "Its capacity is 4 weapons. Once you fill it, you may proceed "
 			"directly to find\nthe room with the secret escape." << endl;
-	cout << "\nThe second satchel will provide you with a moderate "
+	cout << "\n- The Silver Satchel will provide you with a moderate "
 			"chance of success." << endl;
 	cout << "It has a capacity of 5 weapons." << endl;
 	cout << "It will allow you to add repeated weapons into the bag." << endl;
@@ -272,27 +272,44 @@ void Game::satchelChoice() {
 	cout << "With this satchel, you will need to keep track of its contents so"
 			" that you have\n4 unique weapons to be able to commit the murder."
 	<< endl;
+	cout << "\n- The Gold Satchel will provide you with the lowest chance of "
+			"success." << endl;
+	cout << "It has a capacity of 4 weapons, and allows repeated weapons." <<
+	     endl;
+	cout << "Once you reach capacity and attempt to add more weapons, it will "
+			"drop the first\nweapon in it (in a First In First Out format)." <<
+	     endl;
+	cout << "You will need to keep track of its contents and which rooms "
+	     << "contain which\nweapons in order to succeed with the Gold Satchel."
+			<< endl;
 	cout << "\n\tSATCHEL MENU" << endl;
-	cout << "1. Satchel 1 (Easy)" << endl;
-	cout << "2. Satchel 2 (Hard)" << endl;
+	cout << "1. Bronze Satchel" << endl;
+	cout << "2. Silver Satchel" << endl;
+	cout << "3. Gold Satchel" << endl;
 	cout << "Make your choice: ";
 
-	int satchelChoice = intValidation(1,2);
+	int satchelChoice = intValidation(1,3);
 
 	switch (satchelChoice) {
 		case 1: {
 			satchel = new basicSatchel;
-			cout << "\nYou have selected the Easy Satchel." << endl;
+			cout << "\nYou have selected the Bronze Satchel." << endl;
 			cout << "We hope that next time, you will challenge yourself further."
 			  << endl;
 			break;
 		}
 		case 2: {
 			satchel = new vectorSatchel;
-			cout << "\nYou have selected the Hard Satchel." << endl;
-			cout << "The road to success will be long, but, should you succeed, "
-			  "you will be rewarded\nbeyond your wildest dreams." << endl;
+			cout << "\nYou have selected the Silver Satchel." << endl;
+			cout << "We will be watching you closely. Good luck." << endl;
 			break;
+		}
+		case 3: {
+			satchel = new queueSatchel;
+			cout << "\nYou have selected the Gold Satchel." << endl;
+			cout << "You have demonstrated your ambition. Should you succeed, you "
+			  "will be rewarded\n"
+	  "beyond your wildest dreams." << endl;
 		}
 		default:
 			break;
@@ -339,6 +356,9 @@ void Game::updateBoard() {
 void Game::commitMurder() {
 	string weaponChoice;
 
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
 	cout << "Mr. Boddy has entered the billiard room." << endl;
 	cout << "You have successfully collected at least four unique weapons." <<
 	     endl;

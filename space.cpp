@@ -22,16 +22,19 @@ Space::Space() {
 	weapon = "default";
 	top = right = left = bottom = corner = nullptr;
 	newMove = nullptr;
+	cornerAccess = false;
 }
 
 /* The Space class constructor with two parameters initializes the member
  * variables of name and weapon with the appropriate parameters. It also sets
- * the pointers top, right, left, bottom, corner, and newMove to nullptr. */
+ * the pointers top, right, left, bottom, corner, and newMove to nullptr.
+ * Access to the corner passageways should be off when the game begins. */
 Space::Space(string nameIn, string weaponIn) {
 	name = nameIn;
 	weapon = weaponIn;
 	top = right = left = bottom = corner = nullptr;
 	newMove = nullptr;
+	cornerAccess = false;
 }
 
 /* The following functions are mutator functions setting the Space pointers
@@ -70,7 +73,6 @@ string Space::getWeapon() const {
  * which direction the player has elected to travel in. It displays the
  * options for the player to move and takes the player's choice. */
 char Space::makeMove() const {
-	cout << "\nIt is time to move to another room." << endl;
 	cout << "Your options are: " << endl;
 
 	// Print the options available in the current room
@@ -90,9 +92,13 @@ char Space::makeMove() const {
 		cout << "- Right: ";
 		cout << "This would lead to the " << this->right->name << "." << endl;
 	}
-	if (this->corner != nullptr) {
-		cout << "- Corner: " ;
-		cout << "This would lead to the " << this->corner->name << "." << endl;
+
+	// Display corner option only if the bool is true
+	if (cornerAccess) {
+		if (this->corner != nullptr) {
+			cout << "- Corner: ";
+			cout << "This would lead to the " << this->corner->name << "." << endl;
+		}
 	}
 
 	cout << "- Exit: ";
@@ -128,6 +134,18 @@ char Space::makeMove() const {
 	// Else user chose to exit
 	else {
 		return 'e';
+	}
+}
+
+/* setCornerAccess is a void function that takes a char indicating whether
+ * the corner passageways should be displayed as an option for the user. It
+ * is called every round before the player makes a move. */
+void Space::setCornerAccess (char access) {
+	if (access == 'y') {
+		cornerAccess = true;
+	}
+	else {
+		cornerAccess = false;
 	}
 }
 
@@ -170,8 +188,14 @@ string Space::moveValidation() const{
 		else if (input == "Right" && right == nullptr) {
 			cout << "Right does not lead anywhere. Try again.";
 		}
+		// Else if corner does not lead anywhere
 		else if (input == "Corner" && corner == nullptr) {
 			cout << "Corner does not lead anywhere. Try again.";
+		}
+		// Else if corner is an option, but access is off
+		else if (input == "Corner" && corner != nullptr && !cornerAccess) {
+			cout << "Nice try, but you can't access the secret corner passageway "
+			  "now!" << endl;
 		}
 		// If it doesn't point to nullptr, break loop
 		else {

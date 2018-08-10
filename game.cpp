@@ -168,6 +168,22 @@ void Game::startGame() {
 
 		// If murder has not been committed at this stage, display move menu
 		if (!murder) {
+			cout << "\nIt is time to move to another room." << endl;
+
+			// Turn access to corner passageways on or off depending on if
+			// satchel has wrench
+			if (satchel->getWrench()) {
+				cout << "\nHello from Hydra. We noticed that you have a wrench in";
+				cout << " your satchel. While you\nhave a wrench, you may access "
+				"the secret corner passageways in the Boddy Estate." << endl <<
+				     endl;
+				current->setCornerAccess('y');
+			}
+			// Else turn corner access off
+			else {
+				current->setCornerAccess('n');
+			}
+
 			char move = current->makeMove();
 
 			// Depending on char returned, point current to new room or exit

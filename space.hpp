@@ -25,6 +25,8 @@ protected:
 
 	Space* newMove;
 
+	bool cornerAccess;
+
 public:
 	Space(); // Default constructor
 	Space(std::string nameIn, std::string weaponIn);
@@ -38,6 +40,7 @@ public:
 	std::string getName() const;
 	std::string getWeapon() const;
 
+	void setCornerAccess (char access);
 	char makeMove() const;
 	std::string moveValidation() const;
 

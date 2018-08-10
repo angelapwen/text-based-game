@@ -18,8 +18,8 @@ void vectorSatchel::addWeapon(std::string weapon) {
 
 	// If vector size is 5, call randomDrop
 	if (satchel.size() == 5) {
-		cout << "Oops! Your satchel is already full with " << capacity << " "
-				"weapons." << endl;
+		cout << "Oops! Your Silver Satchel is already full with " << capacity <<
+		     " weapons." << endl;
 		cout << "Before adding your new " << weapon << ", you will have to "
 				 "randomly drop one of your existing weapons." << endl;
 		randomDrop();
@@ -47,13 +47,14 @@ void vectorSatchel::addWeapon(std::string weapon) {
 		candlestick = true;
 	}
 
-	cout << "\nYour new " << weapon << " has been added to the satchel." << endl;
+	cout << "\nYour new " << weapon << " has been added to the Silver Satchel."
+												<< endl;
 
 	cout << "Your total weapon count is: " << satchel.size() << "." <<
 	     endl;
 	cout << "Your current weapon list is:" << endl;
 	printWeapons();
-	cout << "The number of unique weapons in your bag is: " <<
+	cout << "The number of unique weapons in your Silver Satchel is: " <<
 	     getNumUniqueWeapons() << "." << endl;
 }
 
@@ -127,7 +128,7 @@ int vectorSatchel::getNumUniqueWeapons() {
 
 void vectorSatchel::printWeapons() const {
 	// Print vector
-	for (auto i: satchel) {
+	for (auto &i: satchel) {
 		cout << "- " << i << endl;
 	}
 }

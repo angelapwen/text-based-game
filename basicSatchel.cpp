@@ -16,8 +16,8 @@ basicSatchel::basicSatchel() : Satchel(4) {
 
 void basicSatchel::addWeapon(std::string weapon) {
 	if (numUniqueWeapons >= capacity) {
-		cout << "Sorry, your satchel is full and you cannot pick up any more "
-			 << "weapons." << endl;
+		cout << "Sorry, your Bronze Satchel is full and you cannot pick up any "
+			 "more weapons." << endl;
 		cout << "You should focus on finding the room in which you will commit "
 			 << "your murder." << endl;
 	}

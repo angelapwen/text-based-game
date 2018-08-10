@@ -2,7 +2,9 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: space.hpp is the Space Class specification file. It specifies
+ * an abstract class Space that Classes Eat, Entertain, and Quiet will
+ * publicly inherit from.
 *******************************************************************************/
 
 #ifndef SPACE_HPP
@@ -22,8 +24,6 @@ protected:
 	Space* corner;
 
 	Space* newMove;
-
-	// Map* map;
 
 public:
 	Space(); // Default constructor
@@ -50,9 +50,9 @@ public:
 	void roomWelcome() const;
 
 	virtual std::string action();
-	virtual ~Space() = default; // Default destructor
-
 	int intValidation(int min, int max);
+
+	virtual ~Space() = default; // Default destructor
 };
 
 

@@ -2,7 +2,11 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: Clue: The Prequel is a text-based adventure game for the
+ * command line. It is loosely based off of the popular murder mystery game
+ * "Clue." The player plays Professor Peter Plum, an eccentric academic with
+ * a dark, deceitful past. Professor Plum receives a mission to complete at
+ * his brother-in-law Mr. Boddy's 30th birthday party.
 *******************************************************************************/
 
 #include <iostream>
@@ -22,9 +26,11 @@ int main() {
 	seed = static_cast<unsigned>(time(0));
 	srand(seed);
 
+	// Construct and begin game
 	Game game;
 	game.startGame();
 
+	// Give player the option to play again
 	int repeatChoice = 0;
 
 	do {

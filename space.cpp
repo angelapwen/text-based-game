@@ -2,7 +2,9 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: space.cpp is the Space Class implementation file. It implements
+ * an abstract class Space that Classes Eat, Entertain, and Quiet will
+ * publicly inherit from.
 *******************************************************************************/
 
 #include "space.hpp"
@@ -13,6 +15,8 @@ using std::cout;
 using std::cin;
 using std::endl;
 
+/* The Space class default constructor should not be used as the Space class
+ * is an abstract class. */
 Space::Space() {
 	name = "default";
 	weapon = "default";
@@ -20,6 +24,9 @@ Space::Space() {
 	newMove = nullptr;
 }
 
+/* The Space class constructor with two parameters initializes the member
+ * variables of name and weapon with the appropriate parameters. It also sets
+ * the pointers top, right, left, bottom, corner, and newMove to nullptr. */
 Space::Space(string nameIn, string weaponIn) {
 	name = nameIn;
 	weapon = weaponIn;
@@ -27,19 +34,46 @@ Space::Space(string nameIn, string weaponIn) {
 	newMove = nullptr;
 }
 
+/* The following functions are mutator functions setting the Space pointers
+ * to Top, Bottom, Left, Right, and Corner for each Space. They will be
+ * called to link the Spaces together after they are constructed. */
+void Space::setTop(Space *roomIn) {
+	top = roomIn;
+}
 
+void Space::setBottom(Space *roomIn) {
+	bottom = roomIn;
+}
+
+void Space::setLeft(Space *roomIn) {
+	left = roomIn;
+}
+
+void Space::setRight(Space *roomIn) {
+	right = roomIn;
+}
+
+void Space::setCorner(Space *roomIn) {
+	corner = roomIn;
+}
+
+/* getName() and getWeapon() are accessor functions returning strings for
+ * their appropriate member variables. */
 string Space::getName() const {
 	return name;
 }
-
 string Space::getWeapon() const {
 	return weapon;
 }
 
+/* makeMove is a method without parameters that returns a char indicating
+ * which direction the player has elected to travel in. It displays the
+ * options for the player to move and takes the player's choice. */
 char Space::makeMove() const {
 	cout << "\nIt is time to move to another room." << endl;
 	cout << "Your options are: " << endl;
 
+	// Print the options available in the current room
 	if (this->top != nullptr) {
 		cout << "- Top: " ;
 		cout << "This would lead to the " << this->top->name << "." << endl;
@@ -69,6 +103,7 @@ char Space::makeMove() const {
 
 	string choice = moveValidation();
 
+	// Return the char value of the validated move
 	if (choice == "Top") {
 		return 't';
 	}
@@ -96,9 +131,10 @@ char Space::makeMove() const {
 	}
 }
 
-/*******************************************************************************
-
- *******************************************************************************/
+/* moveValidation is a method without parameters that returns the validated
+ * string. It checks if the user's input is one of the six accepted strings,
+ * and then if so, checks to see if it leads to another Space. When the input
+ * is validated, it returns the input. */
 string Space::moveValidation() const{
 	string input;
 
@@ -145,6 +181,8 @@ string Space::moveValidation() const{
 	return input;
 }
 
+/* The following functions are accessor functions returning the Space pointer
+ * to the next Space in the direction the user has chosen. */
 Space* Space::getTop() {
 	newMove = this->top;
 	return newMove;
@@ -170,6 +208,10 @@ Space* Space::getCorner() {
 	return newMove;
 }
 
+/* action is a function without parameters that returns the string indicating
+ * if the user has picked up a weapon in the room, based off of the user's
+ * choice of action. It will be called in the inherited classes' action
+ * function overrides. */
 std::string Space::action() {
 	string received;
 
@@ -177,9 +219,11 @@ std::string Space::action() {
 
 	switch (actionChoice) {
 		case 1:
+			// User made the "wrong" choice and does not receive a weapon
 			received = "none";
 			break;
 		case 2:
+			// Return the string of the weapon that the current Space includes
 			received = getWeapon();
 			break;
 		default:
@@ -189,11 +233,9 @@ std::string Space::action() {
 	return received;
 }
 
-/*******************************************************************************
- * intValidation is a function with two int parameters that returns an int
+/* intValidation is a function with two int parameters that returns an int
  * value. It prompts the user for input and validates the input to be an
- * integer between the min and max parameters, and returns the valid value.
-*******************************************************************************/
+ * integer between the min and max parameters, and returns the valid value. */
 int Space::intValidation(int min, int max) {
 	cout << "Make your choice: ";
 
@@ -217,26 +259,8 @@ int Space::intValidation(int min, int max) {
 	return input;
 }
 
-void Space::setTop(Space *roomIn) {
-	top = roomIn;
-}
-
-void Space::setBottom(Space *roomIn) {
-	bottom = roomIn;
-}
-
-void Space::setLeft(Space *roomIn) {
-	left = roomIn;
-}
-
-void Space::setRight(Space *roomIn) {
-	right = roomIn;
-}
-
-void Space::setCorner(Space *roomIn) {
-	corner = roomIn;
-}
-
+/* roomWelcome is a void function without parameters that simply displays the
+ * room name when the player enters. */
 void Space::roomWelcome() const {
 	cout << "\nYou have entered the " << name << "." << endl;
 }

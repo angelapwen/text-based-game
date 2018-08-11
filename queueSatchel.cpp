@@ -33,7 +33,7 @@ void QueueSatchel::addWeapon(std::string weapon) {
 	cout << "\nCongratulations! You have found a " << weapon << "." << endl;
 
 	// If satchel size is 4 or greater, first pop front item in queue
-	if (satchel.size() == 4) {
+	if (satchel.size() == capacity) {
 		cout << "Oops! Your Gold Satchel is already full with " << capacity << " "
 		        "weapons." << endl;
 		cout << "Before adding your new " << weapon << ", you will have to "

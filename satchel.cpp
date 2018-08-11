@@ -2,7 +2,9 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: satchel.cpp is the implementation file for the Satchel abstract
+ * class. The basicSatchel, queueSatchel, and vectorSatchel classes will inherit
+ * from this class.
 *******************************************************************************/
 
 #include "satchel.hpp"
@@ -10,17 +12,30 @@
 using std::cout;
 using std::endl;
 
+/*******************************************************************************
+The Satchel class default constructor initializes the bool variables to false
+ and int variables to -1. It should not be called as Satchel.
+*******************************************************************************/
 Satchel::Satchel() {
 	capacity = numUniqueWeapons = -1;
 	knife = rope = wrench = revolver = candlestick = pipe = false;
 }
 
+/*******************************************************************************
+The Satchel class 1-parameter constructor initializes the satchel's capacity
+ to the int parameter. It initializes the number of unique weapons to 0 and
+ sets all the bool variables to false.
+*******************************************************************************/
 Satchel::Satchel(int capacityIn) {
 	capacity = capacityIn;
 	numUniqueWeapons = 0;
 	knife = rope = wrench = revolver = candlestick = pipe = false;
 }
 
+/*******************************************************************************
+The following 6 functions are accessor functions returning the bool value of
+ the weapon they are accessing.
+*******************************************************************************/
 bool Satchel::getCandlestick() const {
 	return candlestick;
 }

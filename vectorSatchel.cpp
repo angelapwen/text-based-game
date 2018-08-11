@@ -2,7 +2,11 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: vectorSatchel.cpp is the implementation file for the
+ * vectorSatchel class. It inherits publicly from the Satchel abstract class.
+ * It represents the satchel using a vector of strings and overrides the pure
+ * virtual functions to add a weapon, get the number of unique weapons, and
+ * print weapons.
 *******************************************************************************/
 
 #include "vectorSatchel.hpp"
@@ -10,13 +14,23 @@
 using std::cout;
 using std::endl;
 
+/*******************************************************************************
+The vectorSatchel class default constructor calls the Satchel class 1-parameter
+ constructor to initialize the satchel capacity to 5.
+*******************************************************************************/
 vectorSatchel::vectorSatchel() : Satchel(5) {
 }
 
+/*******************************************************************************
+vectorSatchel::addWeapon is a void method that takes a string parameter
+ indicating the weapon the player has picked up. If the satchel is at
+ capacity, the randomDrop method is called. After this, the weapon is pushed
+ to the back of the vector and the contents of the satchel are printed.
+*******************************************************************************/
 void vectorSatchel::addWeapon(std::string weapon) {
 	cout << "\nCongratulations! You have found a " << weapon << "." << endl;
 
-	// If vector size is 5, call randomDrop
+	// If vector is at capacity, call randomDrop
 	if (satchel.size() == 5) {
 		cout << "Oops! Your Silver Satchel is already full with " << capacity <<
 		     " weapons." << endl;
@@ -28,6 +42,7 @@ void vectorSatchel::addWeapon(std::string weapon) {
 	// Now vector should have maximum four weapons
 	satchel.push_back(weapon);
 
+	// Update bool variables to true if the new weapon was not a repeat
 	if (weapon == "knife") {
 		knife = true;
 	}
@@ -50,6 +65,7 @@ void vectorSatchel::addWeapon(std::string weapon) {
 	cout << "\nYour new " << weapon << " has been added to the Silver Satchel."
 												<< endl;
 
+	// Print total weapons, list, and number of unique weapons
 	cout << "Your total weapon count is: " << satchel.size() << "." <<
 	     endl;
 	cout << "Your current weapon list is:" << endl;
@@ -58,6 +74,11 @@ void vectorSatchel::addWeapon(std::string weapon) {
 	     getNumUniqueWeapons() << "." << endl;
 }
 
+/*******************************************************************************
+vectorSatchel::randomDrop is a void function without parameters. It chooses a
+ random weapon to drop within the vector by using the random_shuffle function
+ and then popping the last weapon.
+*******************************************************************************/
 void vectorSatchel::randomDrop() {
 	// Randomly shuffle the contents of vector
 	std::random_shuffle(satchel.begin(),satchel.end());
@@ -71,12 +92,19 @@ void vectorSatchel::randomDrop() {
 	// Update weapon status after one was deleted
 	updateWeapons();
 
+	// Print current weapons
 	cout << "Your current weapon list is:" << endl;
 	printWeapons();
 }
 
+/*******************************************************************************
+vectorSatchel::updateWeapons is a void method without parameters. It is used
+ to switch the bool flag off after a weapon is dropped from the bag, if
+ necessary. It first calls the sort function, and then binary search to find
+ each weapon.
+*******************************************************************************/
 void vectorSatchel::updateWeapons() {
-	// Sort bag for binary searchlet
+	// Sort bag for binary search
 	std::sort(satchel.begin(),satchel.end());
 
 	// Search for each weapon type in bag and set bool flag to false if not found
@@ -100,6 +128,12 @@ void vectorSatchel::updateWeapons() {
 	}
 }
 
+/*******************************************************************************
+vectorSatchel::getNumUniqueWeapons is a function without parameters that
+ returns the int value of the numUniqueWeapons variable. It resets the count
+ of the number of unique weapons, and then adds one depending on each bool
+ variable so it does not count repeated weapons.
+*******************************************************************************/
 int vectorSatchel::getNumUniqueWeapons() {
 	// Reset unique weapon count
 	numUniqueWeapons = 0;
@@ -126,6 +160,10 @@ int vectorSatchel::getNumUniqueWeapons() {
 	return numUniqueWeapons;
 }
 
+/*******************************************************************************
+vectorSatchel::printWeapons is a void function without parameters that prints
+ all contents of the vector.
+*******************************************************************************/
 void vectorSatchel::printWeapons() const {
 	// Print vector
 	for (auto &i: satchel) {

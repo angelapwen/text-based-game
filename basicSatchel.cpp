@@ -2,7 +2,10 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: basicSatchel.hpp is the implementation file for the basicSatchel
+ * class. This class inherits publicly from the Satchel class and primarily
+ * overrides its methods to add a weapon, retrieve the number of unique
+ * weapons, and print the list of weapons.
 *******************************************************************************/
 
 #include "basicSatchel.hpp"
@@ -11,17 +14,29 @@ using std::string;
 using std::endl;
 using std::cout;
 
+/*******************************************************************************
+The basicSatchel class default constructor calls the Satchel class 1-parameter
+ constructor to initialize the satchel capacity to 4.
+*******************************************************************************/
 basicSatchel::basicSatchel() : Satchel(4) {
 }
 
+/*******************************************************************************
+basicSatchel::addWeapon is a void function with a string parameter indicating
+ the weapon the user has picked up. If the satchel is at capacity, the
+ satchel does not add the weapon. If the satchel already contains this
+ weapon, the satchel does not add the weapon.
+*******************************************************************************/
 void basicSatchel::addWeapon(std::string weapon) {
 	if (numUniqueWeapons >= capacity) {
 		cout << "Sorry, your Bronze Satchel is full and you cannot pick up any "
 			 "more weapons." << endl;
 		cout << "You should focus on finding the room in which you will commit "
 			 << "your murder." << endl;
+		cout << "Hydra has destroyed the spare " << weapon << "." << endl;
 	}
 
+	// If user picks up weapon successfully, increment number of unique weapons
 	else {
 		if ((weapon == "knife")) {
 			if (!knife) {
@@ -103,17 +118,26 @@ void basicSatchel::addWeapon(std::string weapon) {
 			}
 		}
 
+		// Print count and weapon list
 		cout << "Your total weapon count is: " << numUniqueWeapons << "." <<
 		     endl;
-		cout << "Your current weapon list is:" << endl;
+		cout << "Your Bronze Satchel currently contains:" << endl;
 		printWeapons();
 	}
 }
 
+/*******************************************************************************
+basicSatchel::getNumUniqueWeapons is a function without parameters that
+ returns the int value of the numUniqueWeapons member variable.
+*******************************************************************************/
 int basicSatchel::getNumUniqueWeapons() {
 	return numUniqueWeapons;
 }
 
+/*******************************************************************************
+basicSatchel::printWeapons is a void function without parameters that prints
+ the list of weapons in the satchel.
+*******************************************************************************/
 void basicSatchel::printWeapons() const {
 	if (candlestick) {
 		cout << "- candlestick" << endl;

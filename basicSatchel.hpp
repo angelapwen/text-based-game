@@ -2,7 +2,10 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: basicSatchel.hpp is the header file for the basicSatchel
+ * class. This class inherits publicly from the Satchel class and primarily
+ * overrides its methods to add a weapon, retrieve the number of unique
+ * weapons, and print the list of weapons.
 *******************************************************************************/
 
 #ifndef BASICSATCHEL_HPP
@@ -11,11 +14,9 @@
 #include "satchel.hpp"
 
 class basicSatchel : public Satchel {
-private:
-
-
 public:
 	basicSatchel();
+
 	void addWeapon(std::string weapon) override;
 
 	int getNumUniqueWeapons() override;

@@ -17,11 +17,10 @@
 class Map {
 private:
 	char board[25][57];
+	void clearPlayer();
 
 public:
 	Map();
-
-	void clearPlayer();
 
 	void placeStudy();
 	void placeLibrary();

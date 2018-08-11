@@ -44,21 +44,19 @@ private:
 
 	bool murder; // True if murder has been committed
 
-public:
-	Game();
 	void welcomeMenu() const;
-
-	void startGame();
 	void satchelChoice();
-
-	int intValidation(int min, int max);
-
 	void updateMap();
-
 	void commitMurder();
-
 	std::string weaponValidation() const;
 
+
+public:
+	Game();
+
+	void startGame();
+
+	int intValidation(int min, int max);
 	void repeatMenu() const;
 
 	~Game();

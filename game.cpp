@@ -93,6 +93,53 @@ void Game::startGame() {
 	string weapon;
 	bool exit = false;
 
+	cout <<
+	     "********************************************************************************"
+	     << endl;
+	// If character is Miss Scarlet, add revolver to Satchel
+	if (character == 's') {
+		cout << "Hello, Miss Scarlet.";
+		satchel->addWeapon("revolver");
+	}
+
+	// If character is Colonel Mustard, increment Satchel capacity
+	else if (character == 'm') {
+		cout << "Hello, Colonel Mustard." << endl;
+		satchel->addCapacity();
+	}
+
+	// If character is Mrs. White, turn switch on corner access
+	else if (character == 'w') {
+		cout << "Hello, Mrs. White." << endl;
+		current->setCornerAccess('y');
+		cout << "You will be able to access the corner passageways throughout "
+			 "the game." << endl;
+	}
+
+	// If character is Mr. Green, display room with escape door
+	else if (character == 'g') {
+		cout << "Hello, Mr. Green." << endl;
+		cout << "Thank you for your generous donation to Hydra." << endl;
+		cout << "The room you must commit the murder in is the billiard room."
+			 << endl;
+	}
+
+	// If character is Mrs. Peacock, multiply the number of total moves
+	else if (character == 'p') {
+		cout << "Hello, Mrs. Peacock." << endl;
+		maxMoves *= 1.25;
+		cout << "Your new number of maximum moves in the estate is " <<
+		     maxMoves << "." << endl;
+	}
+
+	else {
+		cout << "You're a brave man, Professor Plum." << endl;
+	}
+
+	cout << "The Boddy Estate butler greets you at the entrance." << endl;
+	cout << "\nPress enter to begin searching the Estate for weapons." << endl;
+	getchar();
+
 	// Repeat these steps while the murder has not been committed, the user
 			// has not elected to exit, and step count is below max
 	while (steps < maxMoves && !murder && !exit) {
@@ -107,6 +154,7 @@ void Game::startGame() {
 		// Move player to correct place and print board
 		updateMap();
 		map->printBoard();
+		map->printKey();
 
 		// First check if player has enough weapons and is in the Billiards Room
 		if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() == "billiard "
@@ -138,9 +186,13 @@ void Game::startGame() {
 		if (!murder) {
 			cout << "\nIt is time to move to another room." << endl;
 
-			// Turn access to corner passageways on or off depending on if
-			// satchel has wrench
-			if (satchel->getWrench()) {
+			// If character is Mrs. White, set corner access on
+			if (character == 'w') {
+				current->setCornerAccess('y');
+			}
+			// Else if character is not Mrs. White but has wrench, set corner
+			// access on
+			else if (satchel->getWrench()) {
 				cout << "\nHello from Hydra. We noticed that you have a wrench in";
 				cout << " your satchel. While you\nhave a wrench, you may access "
 				"the secret corner passageways in the Boddy Estate." << endl <<
@@ -392,8 +444,8 @@ void Game::characterChoice() {
 			break;
 	}
 
-	cout << "Great. Your disguise has been noted." << endl;
-	cout << "\nPress enter to continue to your next choice." << endl;
+	cout << "Thank you, your choice has been noted." << endl;
+	cout << "\nPress enter to continue." << endl;
 	getchar();
 }
 

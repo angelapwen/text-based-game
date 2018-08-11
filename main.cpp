@@ -10,8 +10,8 @@
 *******************************************************************************/
 
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
+#include <cstdlib> // srand()
+#include <ctime> // time()
 #include "game.hpp"
 
 using std::cin;

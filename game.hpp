@@ -2,7 +2,10 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: game.hpp is the Game class specification file. It specifies a
+ * Class that is composed of a Map pointer, a Satchel pointer, and various
+ * Space pointers. It runs the game loop, allowing the user to pick a
+ * Satchel, move throughout the board, and commit the murder.
 *******************************************************************************/
 
 #ifndef GAME_HPP
@@ -11,9 +14,11 @@
 #include "quiet.hpp"
 #include "eat.hpp"
 #include "entertain.hpp"
+
 #include "basicSatchel.hpp"
 #include "vectorSatchel.hpp"
 #include "queueSatchel.hpp"
+
 #include "map.hpp"
 
 #include <string>
@@ -24,7 +29,7 @@ private:
 
 	Satchel* satchel;
 
-	int steps;
+	int steps; // Count number of moves that have passed
 	Space* current; // Where the player is currently located
 
 	Space* study;
@@ -37,7 +42,7 @@ private:
 	Space* lounge;
 	Space* hall;
 
-	bool murder;
+	bool murder; // True if murder has been committed
 
 public:
 	Game();
@@ -48,7 +53,7 @@ public:
 
 	int intValidation(int min, int max);
 
-	void updateBoard();
+	void updateMap();
 
 	void commitMurder();
 
@@ -57,8 +62,6 @@ public:
 	void repeatMenu() const;
 
 	~Game();
-
-
 };
 
 

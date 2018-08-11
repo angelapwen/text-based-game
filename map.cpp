@@ -2,13 +2,19 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: map.cpp is the Map class implementation file. It implements a
+ * Map class that represents the floor plan of the Boddy Estate. It includes
+ * a constructor, a method to clear the player's previous location, methods
+ * to place the player in each room, and a method to print the board.
 *******************************************************************************/
 
 #include "map.hpp"
 
 using std::string;
 
+/* The Map class constructor fills in the static 2-D array of the board
+ * row-by-row, with strings representing each row. It then initializes the
+ * player in the Library. */
 Map::Map() {
 	// Create strings representing each row of the board
 	string row24 = "|-------------------------------------------------------|\n";
@@ -70,6 +76,9 @@ Map::Map() {
 	board[9][10] = '*';
 }
 
+/* clearPlayer() is a void method without parameters. It removes the player's
+ * previous location from the board. It is called when the player is moved to
+ * a new room. */
 void Map::clearPlayer() {
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 57; j++) {
@@ -80,6 +89,8 @@ void Map::clearPlayer() {
 	}
 }
 
+/* The following nine methods do not have parameters and return void. They
+ * place the Player in the appropriate room. */
 void Map::placeStudy() {
 	clearPlayer();
 	board[3][12] = '*';
@@ -125,6 +136,8 @@ void Map::placeKitchen() {
 	board[21][47] = '*';
 }
 
+/* printBoard is a void method without parameters. It prints out the board
+ * and displays the key for the player. */
 void Map::printBoard() {
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 57; j++) {

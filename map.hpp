@@ -2,7 +2,10 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: map.hpp is the Map class specification file. It specifies a
+ * Map class that represents the floor plan of the Boddy Estate. It includes
+ * a constructor, a method to clear the player's previous location, methods
+ * to place the player in each room, and a method to print the board.
 *******************************************************************************/
 
 #ifndef MAP_HPP

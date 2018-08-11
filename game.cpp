@@ -2,7 +2,10 @@
  * Program: CS 162 Final Project -- Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
- * Description:
+ * Description: game.cpp is the Game class implementation file. It implements a
+ * Class that is composed of a Map pointer, a Satchel pointer, and various
+ * Space pointers. It runs the game loop, allowing the user to pick a
+ * Satchel, move throughout the board, and commit the murder.
 *******************************************************************************/
 
 #include "game.hpp"
@@ -13,11 +16,19 @@ using std::endl;
 using std::cin;
 
 // Total number of moves the player is allowed before the game ends
-const int TOTAL_MOVES = 100;
+const int TOTAL_MOVES = 20;
 
+/*******************************************************************************
+The Game class default and only constructor initializes the member
+ variables steps to 0 and murder to false. It also creates a Map object
+ with the Map pointer member variable, and sets the satchel member variable
+ to nullptr. It then constructs all nine Space pointers for each room, and
+ links the rooms to one another. Finally, it sets the Space pointer
+ current, indicating the player's current location, to the library.
+*******************************************************************************/
 Game::Game() {
-	satchel = nullptr;
-	map = new Map();
+	satchel = nullptr; // Satchel will be allocated later
+	map = new Map(); // Construct map immediately
 	steps = 0;
 	murder = false;
 
@@ -66,61 +77,16 @@ Game::Game() {
 
 	current = library; // Professor Plum starts at the Library
 }
-
-void Game::welcomeMenu() const {
-	cout <<
-	     "\n********************************************************************************"
-	     << endl;
-
-	cout << "\n\t\t\t\t\t\t\t   Clue: The Prequel" << endl;
-	cout <<
-	     "\n********************************************************************************"
-	     << endl;
-	cout << "\nGood evening, Professor Plum." << endl;
-	cout << "We have received your application to join us at Hydra." << endl;
-	cout << "We were pleased to hear of your interest, as we have been ";
-	cout << "watching closely over\nyour work in the past few years." << endl;
-	cout << "\nAs you know, we are an ancient Brotherhood." << endl;
-	cout << "All of our applicants are subject to a series of tests and "
-			"missions to test your\ntrue dedication to our organization.";
-	cout << " Tonight will be your first mission." << endl;
-	cout << "\nThe brother of your late wife, Mr. John Boddy, has invited you "
-			"to his 30th\nbirthday party.";
-	cout << " As a member of the family, you have access to the Boddy estate "
-			"\nprior to the party." << endl;
-	cout << "\nYour mission: " ;
-	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
-	cout << "\nTo complete your mission, you will need to:" << endl;
-	cout << "1. Walk around the estate and interact with the rooms.";
-	cout << " You begin in the library." << endl;
-	cout << "2. If your interactions go well, you will pick up weapons for "
-			"your satchel." << endl;
-	cout << "3. Once you have 4 unique weapons in your satchel, you must "
-			<< "find the appropriate\nroom in which to commit the murder.";
-	cout << " We have set up this room with a secret\nescape so you may leave "
-			"the scene of the crime undetected." << endl;
-
-	cout << "\nOne more thing: as you know, the Boddy Estate is vast." << endl;
-	cout << "It will take time for you to move between rooms to complete the "
-			"mission." << endl;
-	cout << "You will only have time for " << TOTAL_MOVES << " moves between "
-			"rooms to complete your mission\nbefore the dinner party begins." <<
-	     endl;
-
-	cout << "\nYou may choose to use the Emergency Exit at any point in the "
-			"game, although\nthis means you will not have completed your mission"
-			" and have failed Hydra." << endl;
-	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
-	     endl;
-	cout << "Hail, Hydra!" << endl;
-	cout << "\nPress enter to accept your mission."	<< endl;
-	getchar();
-}
-
+/*******************************************************************************
+Game::startGame() is a void function without parameters that runs the majority
+ of the game loop. It allows the player to move to new rooms, checks if the
+ murder can be committed, and displays the exit messages depending on
+ whether the player has won, quit the game, or lost.
+*******************************************************************************/
 void Game::startGame() {
 	welcomeMenu();
 
-	satchelChoice();
+	satchelChoice(); // Construct appropriate satchel
 
 	string weapon;
 	bool exit = false;
@@ -137,12 +103,12 @@ void Game::startGame() {
 		cout << "You are on Move #" << steps << "." << endl;
 
 		// Move player to correct place and print board
-		updateBoard();
+		updateMap();
 		map->printBoard();
 
 		// First check if player has enough weapons and is in the Billiards Room
 		if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() == "billiard "
-																				  "room") {
+			  "room") {
 			current->roomWelcome();
 			commitMurder();
 		}
@@ -184,6 +150,7 @@ void Game::startGame() {
 				current->setCornerAccess('n');
 			}
 
+			// Display options for the user to move and get user choice
 			char move = current->makeMove();
 
 			// Depending on char returned, point current to new room or exit
@@ -220,7 +187,7 @@ void Game::startGame() {
 	if (murder) {
 		cout << "Congratulations, professor! You have completed your mission." <<
 		     endl;
-		cout << "It took you " << steps << " steps to complete your mission." <<
+		cout << "It took you " << steps << " moves to complete your mission." <<
 		     endl;
 		cout << "We have activated a secret escape in the grandfather clock\n";
 		cout << "across from you in the billiard room." << endl;
@@ -231,7 +198,6 @@ void Game::startGame() {
 		cout << "The others will be here soon..." << endl;
 		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
 			 "place." << endl;
-
 	}
 
 		// Else if user reached max number of steps, display exit message
@@ -263,7 +229,73 @@ void Game::startGame() {
 	     "********************************************************************************"
 	     << endl;
 }
+/*******************************************************************************
+Game::welcomeMenu() is a void function without parameters. It displays the game
+ title and tells the player about their goal.
+*******************************************************************************/
+void Game::welcomeMenu() const {
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
 
+	cout << "\n\t\t\t\t\t\t\t   Clue: The Prequel" << endl;
+	cout <<
+	     "\n********************************************************************************"
+	     << endl;
+	cout << "\nGood evening, Professor Plum." << endl;
+	cout << "We have received your application to join us at Hydra." << endl;
+	cout << "We were pleased to hear of your interest, as we have been ";
+	cout << "watching closely over\nyour work in the past few years." << endl;
+	cout << "\nAs you know, we are an ancient Brotherhood." << endl;
+	cout << "All of our applicants are subject to a series of tests and "
+	        "missions to test your\ntrue dedication to our organization.";
+	cout << " Tonight will be your first mission." << endl;
+	cout << "\nThe brother of your late wife, Mr. John Boddy, has invited you "
+	        "to his 30th\nbirthday party.";
+	cout << " As a member of the family, you have access to the Boddy estate "
+	        "\nprior to the party." << endl;
+	cout << "\nYour mission: " ;
+	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
+	cout << "\nTo complete your mission, you will need to:" << endl;
+	cout << "1. Walk around the estate and interact with the rooms.";
+	cout << " You begin in the library." << endl;
+	cout << "2. We will decide whether or not to teleport weapons to you based"
+	        " off of your actions."	<< endl;
+	cout << "If you come across a weapon, you must attempt to put it in your "
+	        "satchel.\nYou may not leave weapons in the rooms for witnesses to "
+	        "find." << endl;
+	cout << "3. Once you have 4 unique weapons in your satchel, you must "
+	     << "find the appropriate\nroom in which to commit the murder.";
+	cout << " We have set up this room with a secret\nescape so you may leave "
+	        "the scene of the crime undetected." << endl;
+
+	cout << "\nOne more thing: as you know, the Boddy Estate is vast." << endl;
+	cout << "It will take time for you to move between rooms to complete the "
+	        "mission." << endl;
+	cout << "You will only have time for " << TOTAL_MOVES << " moves between "
+	       "rooms to complete your mission\nbefore the dinner party begins." <<
+	     endl;
+
+	cout << "\nTo assist you in completing your mission more quickly, we have "
+	        "found a way to\naccess the secret passageways between corner rooms in"
+	        " the Boddy Estate. When\nyour satchel contains the wrench weapon, you"
+	        " may use this special wrench to\nopen the door to the underground "
+	        "tunnels that Mr. Boddy keeps locked up." << endl;
+
+	cout << "\nFinally, you may choose to use the Emergency Exit at any point "
+	        "in the game, although\nthis means you will not have completed your mission"
+	        " and have failed Hydra." << endl;
+	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
+	     endl;
+	cout << "Hail, Hydra!" << endl;
+	cout << "\nPress enter to accept your mission."	<< endl;
+	getchar();
+}
+/*******************************************************************************
+Game::satchelChoice() is a void function without parameters. It displays the
+ three options of satchels the player may pick, along with the benefits of
+ each. Depending on the user choice, it constructs the appropriate object.
+*******************************************************************************/
 void Game::satchelChoice() {
 	cout <<
 	     "********************************************************************************"
@@ -306,6 +338,7 @@ void Game::satchelChoice() {
 
 	int satchelChoice = intValidation(1,3);
 
+	// Construct the appropriate satchel based off the user's choice.
 	switch (satchelChoice) {
 		case 1: {
 			satchel = new basicSatchel;
@@ -335,8 +368,36 @@ void Game::satchelChoice() {
 	cout << "\nPress enter to take your satchel and begin your mission."	<< endl;
 	getchar();
 }
+/*******************************************************************************
+Game::intValidation is a function with two int parameters that returns an int
+ value. It prompts the user for input and validates the input to be an
+ integer between the min and max parameters, and returns the valid value.
+*******************************************************************************/
+int Game::intValidation(int min, int max) {
+	int input;
+	cin >> input;
 
-void Game::updateBoard() {
+	// Try again if input is out of range or fails
+	while (input < min || input > max || cin.fail()) {
+		cout << "Input must be an integer between " << min << " and "
+		     << max << "." << endl;
+		cout << "Please try again: ";
+		cin.clear();
+		cin.ignore(256, '\n');
+		cin >> input;
+	}
+
+	// Flush buffer after successful input
+	cin.clear();
+	cin.ignore(256, '\n');
+
+	return input;
+}
+/*******************************************************************************
+Game::updateMap() is a void function without parameters. It is called in the
+ beginning of each step to update the map depending on where the player is.
+*******************************************************************************/
+void Game::updateMap() {
 	// Place the user's * on map depending on the new room
 	if (current->getName() == "study") {
 		map->placeStudy();
@@ -370,6 +431,12 @@ void Game::updateBoard() {
 	}
 }
 
+/*******************************************************************************
+Game::commitMurder() is a void function without parameters. It is called only if
+ the player is in the billiard room and has four or more unique weapons. It
+ prints the available weapons and allows the user to pick one of them to
+ commit the murder. It sets the murder bool to true.
+*******************************************************************************/
 void Game::commitMurder() {
 	string weaponChoice;
 
@@ -411,8 +478,10 @@ void Game::commitMurder() {
 }
 
 /*******************************************************************************
-
- *******************************************************************************/
+Game::weaponValidation() is a function without parameters that returns the
+ string of the user's input. It validates that the user has selected one of
+ the six weapons in the game, and also that the satchel contains the weapon.
+*******************************************************************************/
 string Game::weaponValidation() const {
 	string input;
 	bool hasWeapon = false;
@@ -461,6 +530,10 @@ string Game::weaponValidation() const {
 	return input;
 }
 
+/*******************************************************************************
+Game::repeatMenu() is a void function without parameters. It displays the
+ options for the user to either play the game again or exit.
+*******************************************************************************/
 void Game::repeatMenu() const {
 	cout << "\n\t PLAY AGAIN?" << endl;
 	cout << "1. Try your hand at joining Hydra again." << endl;
@@ -468,6 +541,10 @@ void Game::repeatMenu() const {
 	cout << "Make your choice: " << endl;
 }
 
+/*******************************************************************************
+Game::~Game is the Game class default destructor. It frees the memory for all
+ the dynamically allocated member variables: satchel, map, and all rooms.
+*******************************************************************************/
 Game::~Game() {
 	delete satchel;
 	delete map;
@@ -484,28 +561,3 @@ Game::~Game() {
 	delete hall;
 }
 
-/*******************************************************************************
- * intValidation is a function with two int parameters that returns an int
- * value. It prompts the user for input and validates the input to be an
- * integer between the min and max parameters, and returns the valid value.
-*******************************************************************************/
-int Game::intValidation(int min, int max) {
-	int input;
-	cin >> input;
-
-	// Try again if input is out of range or fails
-	while (input < min || input > max || cin.fail()) {
-		cout << "Input must be an integer between " << min << " and "
-		     << max << "." << endl;
-		cout << "Please try again: ";
-		cin.clear();
-		cin.ignore(256, '\n');
-		cin >> input;
-	}
-
-	// Flush buffer after successful input
-	cin.clear();
-	cin.ignore(256, '\n');
-
-	return input;
-}

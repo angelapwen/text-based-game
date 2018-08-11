@@ -15,8 +15,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 
-/* The Space class default constructor should not be used as the Space class
- * is an abstract class. */
+/*******************************************************************************
+The Space class default constructor should not be used as the Space class
+ is an abstract class.
+*******************************************************************************/
 Space::Space() {
 	name = "default";
 	weapon = "default";
@@ -25,10 +27,12 @@ Space::Space() {
 	cornerAccess = false;
 }
 
-/* The Space class constructor with two parameters initializes the member
- * variables of name and weapon with the appropriate parameters. It also sets
- * the pointers top, right, left, bottom, corner, and newMove to nullptr.
- * Access to the corner passageways should be off when the game begins. */
+/*******************************************************************************
+The Space class constructor with two parameters initializes the member
+ variables of name and weapon with the appropriate parameters. It also sets
+ the pointers top, right, left, bottom, corner, and newMove to nullptr.
+ Access to the corner passageways should be off when the game begins.
+*******************************************************************************/
 Space::Space(string nameIn, string weaponIn) {
 	name = nameIn;
 	weapon = weaponIn;
@@ -37,9 +41,11 @@ Space::Space(string nameIn, string weaponIn) {
 	cornerAccess = false;
 }
 
-/* The following functions are mutator functions setting the Space pointers
- * to Top, Bottom, Left, Right, and Corner for each Space. They will be
- * called to link the Spaces together after they are constructed. */
+/*******************************************************************************
+The following 5 functions are mutator functions setting the Space pointers
+ to Top, Bottom, Left, Right, and Corner for each Space. They will be
+ called to link the Spaces together after they are constructed.
+*******************************************************************************/
 void Space::setTop(Space *roomIn) {
 	top = roomIn;
 }
@@ -60,8 +66,18 @@ void Space::setCorner(Space *roomIn) {
 	corner = roomIn;
 }
 
-/* getName() and getWeapon() are accessor functions returning strings for
- * their appropriate member variables. */
+/*******************************************************************************
+Space::roomWelcome is a void function without parameters that simply displays
+ the room name when the player enters.
+*******************************************************************************/
+void Space::roomWelcome() const {
+	cout << "\nYou have entered the " << name << "." << endl;
+}
+
+/*******************************************************************************
+getName() and getWeapon() are accessor functions returning strings for
+ their appropriate member variables.
+*******************************************************************************/
 string Space::getName() const {
 	return name;
 }
@@ -69,9 +85,25 @@ string Space::getWeapon() const {
 	return weapon;
 }
 
-/* makeMove is a method without parameters that returns a char indicating
+/*******************************************************************************
+Space::setCornerAccess is a void function that takes a char indicating whether
+ the corner passageways should be displayed as an option for the user. It
+ is called every round before the player makes a move.
+*******************************************************************************/
+void Space::setCornerAccess (char access) {
+	if (access == 'y') {
+		cornerAccess = true;
+	}
+	else {
+		cornerAccess = false;
+	}
+}
+
+/*******************************************************************************
+/* Space::makeMove is a method without parameters that returns a char indicating
  * which direction the player has elected to travel in. It displays the
- * options for the player to move and takes the player's choice. */
+ * options for the player to move and takes the player's choice.
+*******************************************************************************/
 char Space::makeMove() const {
 	cout << "Your options are: " << endl;
 
@@ -137,22 +169,12 @@ char Space::makeMove() const {
 	}
 }
 
-/* setCornerAccess is a void function that takes a char indicating whether
- * the corner passageways should be displayed as an option for the user. It
- * is called every round before the player makes a move. */
-void Space::setCornerAccess (char access) {
-	if (access == 'y') {
-		cornerAccess = true;
-	}
-	else {
-		cornerAccess = false;
-	}
-}
-
-/* moveValidation is a method without parameters that returns the validated
- * string. It checks if the user's input is one of the six accepted strings,
- * and then if so, checks to see if it leads to another Space. When the input
- * is validated, it returns the input. */
+/*******************************************************************************
+Space::moveValidation is a method without parameters that returns the validated
+ string. It checks if the user's input is one of the six accepted strings,
+ and then if so, checks to see if it leads to another Space. When the input
+ is validated, it returns the input.
+*******************************************************************************/
 string Space::moveValidation() const{
 	string input;
 
@@ -205,8 +227,10 @@ string Space::moveValidation() const{
 	return input;
 }
 
-/* The following functions are accessor functions returning the Space pointer
- * to the next Space in the direction the user has chosen. */
+/*******************************************************************************
+The following 5 functions are accessor functions returning the Space pointer
+ * to the next Space in the direction the user has chosen.
+*******************************************************************************/
 Space* Space::getTop() {
 	newMove = this->top;
 	return newMove;
@@ -232,10 +256,12 @@ Space* Space::getCorner() {
 	return newMove;
 }
 
-/* action is a function without parameters that returns the string indicating
- * if the user has picked up a weapon in the room, based off of the user's
- * choice of action. It will be called in the inherited classes' action
- * function overrides. */
+/*******************************************************************************
+Space::action is a function without parameters that returns the string
+ indicating whether the user has picked up a weapon in the room, based off of
+ the user's choice of action. It will be called in the inherited classes' action
+ function overrides.
+*******************************************************************************/
 std::string Space::action() {
 	string received;
 
@@ -257,9 +283,11 @@ std::string Space::action() {
 	return received;
 }
 
-/* intValidation is a function with two int parameters that returns an int
- * value. It prompts the user for input and validates the input to be an
- * integer between the min and max parameters, and returns the valid value. */
+/*******************************************************************************
+Space::intValidation is a function with two int parameters that returns an int
+ value. It prompts the user for input and validates the input to be an
+ integer between the min and max parameters, and returns the valid value.
+*******************************************************************************/
 int Space::intValidation(int min, int max) {
 	cout << "Make your choice: ";
 
@@ -281,10 +309,4 @@ int Space::intValidation(int min, int max) {
 	cin.ignore(256, '\n');
 
 	return input;
-}
-
-/* roomWelcome is a void function without parameters that simply displays the
- * room name when the player enters. */
-void Space::roomWelcome() const {
-	cout << "\nYou have entered the " << name << "." << endl;
 }

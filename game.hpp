@@ -43,8 +43,10 @@ private:
 	Space* hall;
 
 	bool murder; // True if murder has been committed
+	char character; // Stores the type of character player has chosen
 
 	void welcomeMenu() const;
+	void characterChoice();
 	void satchelChoice();
 	void updateMap();
 	void commitMurder();

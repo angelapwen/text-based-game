@@ -16,7 +16,7 @@ using std::endl;
 using std::cin;
 
 // Total number of moves the player is allowed before the game ends
-const int TOTAL_MOVES = 20;
+int maxMoves = 20;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member
@@ -75,7 +75,8 @@ Game::Game() {
 	hall->setRight(lounge);
 	hall->setLeft(study);
 
-	current = library; // Professor Plum starts at the Library
+	character = ' ';
+	current = nullptr; // Location of start depends on character choice
 }
 /*******************************************************************************
 Game::startGame() is a void function without parameters that runs the majority
@@ -86,6 +87,7 @@ Game::startGame() is a void function without parameters that runs the majority
 void Game::startGame() {
 	welcomeMenu();
 
+	characterChoice();
 	satchelChoice(); // Construct appropriate satchel
 
 	string weapon;
@@ -93,7 +95,7 @@ void Game::startGame() {
 
 	// Repeat these steps while the murder has not been committed, the user
 			// has not elected to exit, and step count is below max
-	while (steps < TOTAL_MOVES && !murder && !exit) {
+	while (steps < maxMoves && !murder && !exit) {
 		// Increment and print the step number
 		steps++;
 
@@ -201,7 +203,7 @@ void Game::startGame() {
 	}
 
 		// Else if user reached max number of steps, display exit message
-	else if (steps >= TOTAL_MOVES) {
+	else if (steps >= maxMoves) {
 		cout << "Unfortunately, you exceeded the total number of moves to "
 				  "complete your mission." << endl;
 		cout << "We have removed you from Mr. Boddy's estate." << endl;
@@ -250,10 +252,9 @@ void Game::welcomeMenu() const {
 	cout << "All of our applicants are subject to a series of tests and "
 	        "missions to test your\ntrue dedication to our organization.";
 	cout << " Tonight will be your first mission." << endl;
-	cout << "\nThe brother of your late wife, Mr. John Boddy, has invited you "
-	        "to his 30th\nbirthday party.";
-	cout << " As a member of the family, you have access to the Boddy estate "
-	        "\nprior to the party." << endl;
+	cout << "\nMr. John Boddy has invited you to his 30th birthday party." <<
+	     endl;
+	cout << "You have access to the Boddy estate prior to the party." << endl;
 	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
 	cout << "\nTo complete your mission, you will need to:" << endl;
@@ -272,7 +273,7 @@ void Game::welcomeMenu() const {
 	cout << "\nOne more thing: as you know, the Boddy Estate is vast." << endl;
 	cout << "It will take time for you to move between rooms to complete the "
 	        "mission." << endl;
-	cout << "You will only have time for " << TOTAL_MOVES << " moves between "
+	cout << "You will only have time for " << maxMoves << " moves between "
 	       "rooms to complete your mission\nbefore the dinner party begins." <<
 	     endl;
 
@@ -291,6 +292,111 @@ void Game::welcomeMenu() const {
 	cout << "\nPress enter to accept your mission."	<< endl;
 	getchar();
 }
+
+/*******************************************************************************
+Game::characterChoice() is a void function without parameters. It displays
+ the six options of characters the player may pick, along with the special
+ features of each. It then sets the character member variable and initializes
+ the current member variable to the appropriate room.
+*******************************************************************************/
+void Game::characterChoice() {
+	cout <<
+	     "********************************************************************************"
+	     << endl;
+	cout << "You may pick a disguise before you enter." << endl;
+	cout << "\nYou have the option of disguising yourself with Hydra technology "
+			"as "
+			"one of\nthe other guests while you complete your mission. ";
+	cout << "Each disguise will come with a\nspecial feature. ";
+	cout << "Each character also begins in a different room in the estate." <<
+	     endl;
+	cout << "If you continue as yourself, you will not receive a special "
+			"feature- but Hydra\nwill take note of your ambition and courage." <<
+	     endl;
+	cout << "\nThe disguises we have available are:" << endl;
+	cout << "\n- Miss Scarlet is a femme fetale." << endl;
+	cout << "Special Feature: Miss Scarlet has charmed a Hydra employee to let"
+			" her satchel\nbegin with a revolver instead of empty." << endl;
+	cout << "Starting Location: Hall." << endl;
+	cout << "\n- Colonel Mustard is a dangerous hunter." << endl;
+	cout << "Special Feature: Colonel Mustard's satchel's capacity is 1 more "
+			"than the\ndefault number."	<< endl;
+	cout << "Starting Location: Dining Room." << endl;
+	cout << "\n- Mrs. White is the disgruntled servant of the estate." << endl;
+	cout << "Special Feature: Mrs. White automatically has access to all the "
+			"corner\npassageways throughout the game, regardless of if she has "
+			"the wrench." << endl;
+	cout << "Starting Location: Kitchen." << endl;
+	cout << "\n- Mr. Green is a mobster." << endl;
+	cout << "Special Feature: Mr. Green has paid one of the Hydra employees "
+			"off to find out\nwhich room the secret escape is in before the game "
+			"begins." << endl;
+	cout << "Starting Location: Ballroom." << endl;
+	cout << "\n- Mrs. Peacock is a grand dame." << endl;
+	cout << "Special Feature: Due to her age, Mrs. Peacock receives 1.25x the "
+			"number of\nmaximum moves before the dinner begins." << endl;
+	cout << "Starting Location: Conservatory." << endl;
+	cout << "\n- Complete your mission as Professor Plum." << endl;
+	cout << "Starting Location: Library." << endl;
+	cout << "\nHere is a map of the Estate:" << endl;
+	map->printBoard();
+	cout << "\n\tCHARACTER MENU" << endl;
+	cout << "1. Miss Scarlet" << endl;
+	cout << "2. Colonel Mustard" << endl;
+	cout << "3. Mrs. White" << endl;
+	cout << "4. Mr. Green" << endl;
+	cout << "5. Mrs. Peacock" << endl;
+	cout << "6. Turn down the disguise-- remain as Professor Plum." << endl;
+
+	int characterChoice = intValidation(1,6);
+
+	// Initialize character variable depending on choice
+	switch (characterChoice) {
+		case 1: {
+			character = 's'; // For Scarlet
+			current = hall;
+			map->placeHall();
+			break;
+		}
+		case 2: {
+			character = 'm'; // For Mustard
+			current = dining;
+			map->placeDining();
+			break;
+		}
+		case 3: {
+			character = 'w'; // For White
+			current = kitchen;
+			map->placeKitchen();
+			break;
+		}
+		case 4: {
+			character = 'g'; // For Green
+			current = ballroom;
+			map->placeBallroom();
+			break;
+		}
+		case 5: {
+			character = 'p'; // For Peacock
+			current = conservatory;
+			map->placeConservatory();
+			break;
+		}
+			case 6: {
+			character = 'o'; // For original, Plum
+			current = library;
+			map->placeLibrary();
+			break;
+		}
+		default:
+			break;
+	}
+
+	cout << "Great. Your disguise has been noted." << endl;
+	cout << "\nPress enter to continue to your next choice." << endl;
+	getchar();
+}
+
 /*******************************************************************************
 Game::satchelChoice() is a void function without parameters. It displays the
  three options of satchels the player may pick, along with the benefits of
@@ -560,4 +666,3 @@ Game::~Game() {
 	delete lounge;
 	delete hall;
 }
-

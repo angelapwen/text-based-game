@@ -13,8 +13,7 @@
 using std::string;
 
 /* The Map class constructor fills in the static 2-D array of the board
- * row-by-row, with strings representing each row. It then initializes the
- * player in the Library. */
+ * row-by-row, with strings representing each row.  */
 Map::Map() {
 	// Create strings representing each row of the board
 	string row24 = "|-------------------------------------------------------|\n";
@@ -72,8 +71,6 @@ Map::Map() {
 		board[24][j] = row00[j];
 	}
 
-	// Initialize player in the Library
-	board[9][10] = '*';
 }
 
 /* clearPlayer() is a void method without parameters. It removes the player's

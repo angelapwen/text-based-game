@@ -448,7 +448,7 @@ void Game::commitMurder() {
 	     endl;
 	cout << "This is your opportunity to murder him and flee the scene!" << endl;
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
-	cout << "Your options are: " << endl;
+	cout << "The contents of your satchel: " << endl;
 
 	// Print weapons in the satchel
 	satchel->printWeapons();

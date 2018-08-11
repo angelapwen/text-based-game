@@ -399,6 +399,7 @@ void Game::characterChoice() {
 	cout << "4. Mr. Green" << endl;
 	cout << "5. Mrs. Peacock" << endl;
 	cout << "6. Turn down the disguise-- remain as Professor Plum." << endl;
+	cout << "Make your choice: ";
 
 	int characterChoice = intValidation(1,6);
 
@@ -616,7 +617,26 @@ void Game::commitMurder() {
 
 	cout << "\nYou advance towards Mr. Boddy, " << weaponChoice << " in hand."
 																				  << endl;
-	cout << "He smiles at you. \"Peter! It's been a long time.\"" << endl;
+	cout << "He smiles at you. \"";
+	if (character == 's') {
+		cout << "Miss Scarlet!";
+	}
+	else if (character == 'm') {
+		cout << "Colonel Mustard!";
+	}
+	else if (character == 'w') {
+		cout << "Mrs. White!";
+	}
+	else if (character == 'g') {
+		cout << "Mr. Green!";
+	}
+	else if (character == 'p') {
+		cout << "Mrs. Peacock!";
+	}
+	else {
+		cout << "Professor Plum!";
+	}
+	cout << " Where did you come from?\"" << endl;
 	cout << "You do not hesitate." << endl;
 	cout << "After all, Hydra is counting on you." << endl;
 

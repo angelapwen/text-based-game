@@ -35,13 +35,13 @@ public:
 	virtual int getNumUniqueWeapons() = 0;
 	virtual void printWeapons() const = 0;
 
-	// Virtual accessor functions for each bool variable
-	virtual bool getKnife() const;
-	virtual bool getWrench() const;
-	virtual bool getCandlestick() const;
-	virtual bool getRope() const;
-	virtual bool getPipe() const;
-	virtual bool getRevolver() const;
+	// Accessor functions for each bool variable
+	bool getKnife() const;
+	bool getWrench() const;
+	bool getCandlestick() const;
+	bool getRope() const;
+	bool getPipe() const;
+	bool getRevolver() const;
 
 	// Virtual destructor
 	virtual ~Satchel() = default;

@@ -35,6 +35,8 @@ public:
 	virtual int getNumUniqueWeapons() = 0;
 	virtual void printWeapons() const = 0;
 
+	void addCapacity();
+
 	// Accessor functions for each bool variable
 	bool getKnife() const;
 	bool getWrench() const;

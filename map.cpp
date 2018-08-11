@@ -133,9 +133,8 @@ void Map::placeKitchen() {
 	board[21][47] = '*';
 }
 
-/* printBoard is a void method without parameters. It prints out the board
- * and displays the key for the player. */
-void Map::printBoard() {
+/* printBoard is a void method without parameters. It prints out the board. */
+void Map::printBoard() const {
 	for (int i = 0; i < 25; i++) {
 		for (int j = 0; j < 57; j++) {
 			std::cout << board[i][j];
@@ -143,6 +142,10 @@ void Map::printBoard() {
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << "\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
 }
 
+/* printKey is a void method without parameters. It displays the key for
+ * the board. */
+void Map::printKey() const {
+	std::cout << "\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
+}

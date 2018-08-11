@@ -27,6 +27,9 @@ protected:
 
 	bool cornerAccess;
 
+	std::string moveValidation() const;
+	int intValidation(int min, int max);
+
 public:
 	Space(); // Default constructor
 	Space(std::string nameIn, std::string weaponIn);
@@ -38,11 +41,9 @@ public:
 	void setCorner(Space* roomIn);
 
 	std::string getName() const;
-	std::string getWeapon() const;
 
 	void setCornerAccess (char access);
 	char makeMove() const;
-	std::string moveValidation() const;
 
 	Space* getTop();
 	Space* getBottom();
@@ -53,7 +54,7 @@ public:
 	void roomWelcome() const;
 
 	virtual std::string action();
-	int intValidation(int min, int max);
+
 
 	virtual ~Space() = default; // Default destructor
 };

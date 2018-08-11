@@ -75,14 +75,10 @@ void Space::roomWelcome() const {
 }
 
 /*******************************************************************************
-getName() and getWeapon() are accessor functions returning strings for
- their appropriate member variables.
+Space:: is an acccessor function returning the string value of the name.
 *******************************************************************************/
 string Space::getName() const {
 	return name;
-}
-string Space::getWeapon() const {
-	return weapon;
 }
 
 /*******************************************************************************
@@ -100,9 +96,9 @@ void Space::setCornerAccess (char access) {
 }
 
 /*******************************************************************************
-/* Space::makeMove is a method without parameters that returns a char indicating
- * which direction the player has elected to travel in. It displays the
- * options for the player to move and takes the player's choice.
+Space::makeMove is a method without parameters that returns a char indicating
+ which direction the player has elected to travel in. It displays the
+ options for the player to move and takes the player's choice.
 *******************************************************************************/
 char Space::makeMove() const {
 	cout << "Your options are: " << endl;
@@ -274,7 +270,7 @@ std::string Space::action() {
 			break;
 		case 2:
 			// Return the string of the weapon that the current Space includes
-			received = getWeapon();
+			received = weapon;
 			break;
 		default:
 			break;

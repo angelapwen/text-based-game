@@ -16,16 +16,16 @@
 #include <vector>
 #include <algorithm> // std::random_shuffle, std::sort, std::binary_search
 
-class vectorSatchel: public Satchel {
+class VectorSatchel: public Satchel {
 private:
 	std::vector<std::string> satchel; // Represent satchel with vector of strings
-
-public:
-	vectorSatchel();
-
-	void addWeapon(std::string weapon) override;
 	void randomDrop();
 	void updateWeapons();
+
+public:
+	VectorSatchel();
+
+	void addWeapon(std::string weapon) override;
 
 	int getNumUniqueWeapons() override;
 

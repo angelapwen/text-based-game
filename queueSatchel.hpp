@@ -17,15 +17,15 @@
 #include <deque>
 #include <algorithm> // std::count
 
-class queueSatchel: public Satchel {
+class QueueSatchel: public Satchel {
 private:
 	std::deque<std::string> satchel; // Represent satchel with deque of strings
+	void updateWeapons();
 
 public:
-	queueSatchel();
+	QueueSatchel();
 
 	void addWeapon(std::string weapon) override;
-	void updateWeapons();
 
 	int getNumUniqueWeapons() override;
 

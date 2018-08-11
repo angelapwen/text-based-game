@@ -16,20 +16,20 @@ using std::cout;
 using std::endl;
 
 /*******************************************************************************
-The queueSatchel class default constructor calls the Satchel class 1-parameter
+The QueueSatchel class default constructor calls the Satchel class 1-parameter
  constructor to initialize the satchel capacity to 4.
 *******************************************************************************/
-queueSatchel::queueSatchel() : Satchel(4) {
+QueueSatchel::QueueSatchel() : Satchel(4) {
 
 }
 
 /*******************************************************************************
-queueSatchel::addWeapon is a void method that takes a string parameter
+QueueSatchel::addWeapon is a void method that takes a string parameter
  indicating the weapon the player has picked up. If the satchel is at
  capacity, the weapon at the front is removed. After this, the weapon is pushed
  to the back of the vector and the contents of the satchel are printed.
 *******************************************************************************/
-void queueSatchel::addWeapon(std::string weapon) {
+void QueueSatchel::addWeapon(std::string weapon) {
 	cout << "\nCongratulations! You have found a " << weapon << "." << endl;
 
 	// If satchel size is 4 or greater, first pop front item in queue
@@ -85,12 +85,12 @@ void queueSatchel::addWeapon(std::string weapon) {
 }
 
 /*******************************************************************************
-vectorSatchel::updateWeapons is a void method without parameters. It is used
+QueueSatchel::updateWeapons is a void method without parameters. It is used
  to switch the bool flag off after a weapon is dropped from the bag, if
  necessary. It uses the count method to count each type of weapon. If the
  count is 0, the bool flag is flipped to off.
 *******************************************************************************/
-void queueSatchel::updateWeapons() {
+void QueueSatchel::updateWeapons() {
 	// Count weapons in deque
 	long count;
 
@@ -127,12 +127,12 @@ void queueSatchel::updateWeapons() {
 }
 
 /*******************************************************************************
-queueSatchel::getNumUniqueWeapons is a function without parameters that
+QueueSatchel::getNumUniqueWeapons is a function without parameters that
  returns the int value of the numUniqueWeapons variable. It resets the count
  of the number of unique weapons, and then adds one depending on each bool
  variable so it does not count repeated weapons.
 *******************************************************************************/
-int queueSatchel::getNumUniqueWeapons() {
+int QueueSatchel::getNumUniqueWeapons() {
 	// Reset unique weapon count
 	numUniqueWeapons = 0;
 
@@ -159,10 +159,10 @@ int queueSatchel::getNumUniqueWeapons() {
 }
 
 /*******************************************************************************
-queueSatchel::printWeapons is a void function without parameters that prints
+QueueSatchel::printWeapons is a void function without parameters that prints
  all contents of the vector.
 *******************************************************************************/
-void queueSatchel::printWeapons() const {
+void QueueSatchel::printWeapons() const {
 	for (auto &i: satchel) {
 		cout << "- " << i << endl;
 	}

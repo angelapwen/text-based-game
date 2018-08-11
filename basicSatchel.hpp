@@ -13,9 +13,9 @@
 
 #include "satchel.hpp"
 
-class basicSatchel : public Satchel {
+class BasicSatchel : public Satchel {
 public:
-	basicSatchel();
+	BasicSatchel();
 
 	void addWeapon(std::string weapon) override;
 

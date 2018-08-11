@@ -192,7 +192,7 @@ void Game::startGame() {
 		cout << "We have activated a secret escape in the grandfather clock\n";
 		cout << "across from you in the billiard room." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
-		cout << "\n\nYour second mission:" << endl;
+		cout << "\n\nYour next mission will be:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
 			 "MURDER." << endl;
 		cout << "The others will be here soon..." << endl;
@@ -265,7 +265,7 @@ void Game::welcomeMenu() const {
 	        "satchel.\nYou may not leave weapons in the rooms for witnesses to "
 	        "find." << endl;
 	cout << "3. Once you have 4 unique weapons in your satchel, you must "
-	     << "find the appropriate\nroom in which to commit the murder.";
+	     << "find the correct\nroom in which to commit the murder.";
 	cout << " We have set up this room with a secret\nescape so you may leave "
 	        "the scene of the crime undetected." << endl;
 
@@ -341,21 +341,21 @@ void Game::satchelChoice() {
 	// Construct the appropriate satchel based off the user's choice.
 	switch (satchelChoice) {
 		case 1: {
-			satchel = new basicSatchel;
+			satchel = new BasicSatchel;
 			cout << "\nYou have selected the Bronze Satchel." << endl;
 			cout << "We hope that next time, you will challenge yourself further."
 			  << endl;
 			break;
 		}
 		case 2: {
-			satchel = new vectorSatchel;
+			satchel = new VectorSatchel;
 			cout << "\nYou have selected the Silver Satchel." << endl;
 			cout << "A safe choice. We will be watching you closely to assess "
 			  "your talent." << endl;
 			break;
 		}
 		case 3: {
-			satchel = new queueSatchel;
+			satchel = new QueueSatchel;
 			cout << "\nYou have selected the Gold Satchel." << endl;
 			cout << "You have demonstrated your ambition. Should you succeed, you "
 			  "will be rewarded\n"

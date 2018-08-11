@@ -15,19 +15,19 @@ using std::cout;
 using std::endl;
 
 /*******************************************************************************
-The vectorSatchel class default constructor calls the Satchel class 1-parameter
+The VectorSatchel class default constructor calls the Satchel class 1-parameter
  constructor to initialize the satchel capacity to 5.
 *******************************************************************************/
-vectorSatchel::vectorSatchel() : Satchel(5) {
+VectorSatchel::VectorSatchel() : Satchel(5) {
 }
 
 /*******************************************************************************
-vectorSatchel::addWeapon is a void method that takes a string parameter
+VectorSatchel::addWeapon is a void method that takes a string parameter
  indicating the weapon the player has picked up. If the satchel is at
  capacity, the randomDrop method is called. After this, the weapon is pushed
  to the back of the vector and the contents of the satchel are printed.
 *******************************************************************************/
-void vectorSatchel::addWeapon(std::string weapon) {
+void VectorSatchel::addWeapon(std::string weapon) {
 	cout << "\nCongratulations! You have found a " << weapon << "." << endl;
 
 	// If vector is at capacity, call randomDrop
@@ -75,11 +75,11 @@ void vectorSatchel::addWeapon(std::string weapon) {
 }
 
 /*******************************************************************************
-vectorSatchel::randomDrop is a void function without parameters. It chooses a
+VectorSatchel::randomDrop is a void function without parameters. It chooses a
  random weapon to drop within the vector by using the random_shuffle function
  and then popping the last weapon.
 *******************************************************************************/
-void vectorSatchel::randomDrop() {
+void VectorSatchel::randomDrop() {
 	// Randomly shuffle the contents of vector
 	std::random_shuffle(satchel.begin(),satchel.end());
 
@@ -98,12 +98,12 @@ void vectorSatchel::randomDrop() {
 }
 
 /*******************************************************************************
-vectorSatchel::updateWeapons is a void method without parameters. It is used
+VectorSatchel::updateWeapons is a void method without parameters. It is used
  to switch the bool flag off after a weapon is dropped from the bag, if
  necessary. It first calls the sort function, and then binary search to find
  each weapon.
 *******************************************************************************/
-void vectorSatchel::updateWeapons() {
+void VectorSatchel::updateWeapons() {
 	// Sort bag for binary search
 	std::sort(satchel.begin(),satchel.end());
 
@@ -129,12 +129,12 @@ void vectorSatchel::updateWeapons() {
 }
 
 /*******************************************************************************
-vectorSatchel::getNumUniqueWeapons is a function without parameters that
+VectorSatchel::getNumUniqueWeapons is a function without parameters that
  returns the int value of the numUniqueWeapons variable. It resets the count
  of the number of unique weapons, and then adds one depending on each bool
  variable so it does not count repeated weapons.
 *******************************************************************************/
-int vectorSatchel::getNumUniqueWeapons() {
+int VectorSatchel::getNumUniqueWeapons() {
 	// Reset unique weapon count
 	numUniqueWeapons = 0;
 
@@ -161,10 +161,10 @@ int vectorSatchel::getNumUniqueWeapons() {
 }
 
 /*******************************************************************************
-vectorSatchel::printWeapons is a void function without parameters that prints
+VectorSatchel::printWeapons is a void function without parameters that prints
  all contents of the vector.
 *******************************************************************************/
-void vectorSatchel::printWeapons() const {
+void VectorSatchel::printWeapons() const {
 	// Print vector
 	for (auto &i: satchel) {
 		cout << "- " << i << endl;

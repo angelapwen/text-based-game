@@ -15,19 +15,19 @@ using std::endl;
 using std::cout;
 
 /*******************************************************************************
-The basicSatchel class default constructor calls the Satchel class 1-parameter
+The BasicSatchel class default constructor calls the Satchel class 1-parameter
  constructor to initialize the satchel capacity to 4.
 *******************************************************************************/
-basicSatchel::basicSatchel() : Satchel(4) {
+BasicSatchel::BasicSatchel() : Satchel(4) {
 }
 
 /*******************************************************************************
-basicSatchel::addWeapon is a void function with a string parameter indicating
+BasicSatchel::addWeapon is a void function with a string parameter indicating
  the weapon the user has picked up. If the satchel is at capacity, the
  satchel does not add the weapon. If the satchel already contains this
  weapon, the satchel does not add the weapon.
 *******************************************************************************/
-void basicSatchel::addWeapon(std::string weapon) {
+void BasicSatchel::addWeapon(std::string weapon) {
 	if (numUniqueWeapons >= capacity) {
 		cout << "Sorry, your Bronze Satchel is full and you cannot pick up any "
 			 "more weapons." << endl;
@@ -127,18 +127,18 @@ void basicSatchel::addWeapon(std::string weapon) {
 }
 
 /*******************************************************************************
-basicSatchel::getNumUniqueWeapons is a function without parameters that
+BasicSatchel::getNumUniqueWeapons is a function without parameters that
  returns the int value of the numUniqueWeapons member variable.
 *******************************************************************************/
-int basicSatchel::getNumUniqueWeapons() {
+int BasicSatchel::getNumUniqueWeapons() {
 	return numUniqueWeapons;
 }
 
 /*******************************************************************************
-basicSatchel::printWeapons is a void function without parameters that prints
+BasicSatchel::printWeapons is a void function without parameters that prints
  the list of weapons in the satchel.
 *******************************************************************************/
-void basicSatchel::printWeapons() const {
+void BasicSatchel::printWeapons() const {
 	if (candlestick) {
 		cout << "- candlestick" << endl;
 	}

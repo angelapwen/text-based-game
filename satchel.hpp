@@ -46,8 +46,7 @@ public:
 	bool getRevolver() const;
 
 	// Virtual destructor
-	virtual ~Satchel() = default;
-
+	virtual ~Satchel();
 };
 
 

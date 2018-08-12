@@ -70,3 +70,9 @@ void Satchel::addCapacity() {
 	cout << "Your chosen satchel has a new capacity of " << capacity << "." <<
 	     endl;
 }
+
+/*******************************************************************************
+Satchel::~Satchel is a default virtual destructor because the Satchel class
+ includes virtual functions.
+*******************************************************************************/
+Satchel::~Satchel() = default;

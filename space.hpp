@@ -55,8 +55,7 @@ public:
 
 	virtual std::string action();
 
-
-	virtual ~Space() = default; // Default destructor
+	virtual ~Space() = 0; // Pure virtual destructor
 };
 
 

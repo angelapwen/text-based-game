@@ -306,3 +306,9 @@ int Space::intValidation(int min, int max) {
 
 	return input;
 }
+
+/*******************************************************************************
+Space::~Space is a pure virtual destructor with default implementation, making
+ the Space class an abstract class.
+*******************************************************************************/
+Space::~Space() = default;

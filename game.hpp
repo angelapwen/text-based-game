@@ -43,6 +43,8 @@ private:
 	Space* lounge;
 	Space* hall;
 
+	std::string murderRoom;
+
 	bool murder; // True if murder has been committed
 	bool discovery; // True if character has been found out before game ends
 	char character; // Stores the type of character player has chosen

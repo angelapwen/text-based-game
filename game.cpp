@@ -77,6 +77,51 @@ Game::Game() {
 
 	character = ' ';
 	current = nullptr; // Location of start depends on character choice
+
+	// Set location of murder to a random room
+	int murderLocation = (rand() % 9) + 1;
+	switch (murderLocation) {
+		case 1: {
+			murderRoom = "study";
+			break;
+		}
+		case 2: {
+			murderRoom = "hall";
+			break;
+		}
+		case 3: {
+			murderRoom = "lounge";
+			break;
+		}
+		case 4: {
+			murderRoom = "dining room";
+			break;
+		}
+		case 5: {
+			murderRoom = "kitchen";
+			break;
+		}
+		case 6: {
+			murderRoom = "ballroom";
+			break;
+		}
+		case 7: {
+			murderRoom = "conservatory";
+			break;
+		}
+		case 8: {
+			murderRoom = "billiard room";
+			break;
+		}
+		case 9: {
+			murderRoom = "library";
+			break;
+		}
+		default: {
+			murderRoom = " ";
+			break;
+		}
+	}
 }
 /*******************************************************************************
 Game::startGame() is a void function without parameters that runs the majority
@@ -119,8 +164,8 @@ void Game::startGame() {
 	else if (character == 'g') {
 		cout << "Hello, Mr. Green." << endl;
 		cout << "Thank you for your generous donation to Hydra." << endl;
-		cout << "The room you must commit the murder in is the billiard room."
-		     << endl;
+		cout << "The room you must commit the murder in is the " << murderRoom
+		     << "." << endl;
 	}
 
 		// If character is Mrs. Peacock, multiply the number of total moves
@@ -159,10 +204,9 @@ void Game::startGame() {
 		map->printBoard();
 		map->printKey();
 
-		// Check if player has enough weapons and is in the Billiards Room
+		// Check if player has enough weapons and is in the appropriate room
 		if ((satchel->getNumUniqueWeapons()) > 3 &&
-		    current->getName() == "billiard "
-		                          "room") {
+		    current->getName() == murderRoom) {
 			current->roomWelcome();
 			commitMurder();
 		}
@@ -190,9 +234,9 @@ void Game::startGame() {
 				satchel->addWeapon(weapon);
 			}
 
-			// Check again if player has enough weapons and is in Billiards Room
+			// Check again if player has enough weapons and is in the correct room
 			if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() ==
-			                                            "billiard room") {
+			                                            murderRoom) {
 				commitMurder();
 			}
 		}
@@ -273,12 +317,10 @@ void Game::startGame() {
 
 	// If murder has been committed, display congratulations
 	if (murder) {
-		cout << "Congratulations, professor! You have completed your mission." <<
-		     endl;
-		cout << "It took you " << steps << " moves to complete your mission." <<
-		     endl;
-		cout << "We have activated a secret escape in the grandfather clock\n";
-		cout << "across from you in the billiard room." << endl;
+		cout << "Congratulations, professor! You have completed your mission in "
+			  << steps << " moves." << endl;
+		cout << "We have activated a secret escape in the " << murderRoom <<
+					" ." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
 		cout << "\n\nYour next mission will be:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
@@ -365,8 +407,7 @@ void Game::welcomeMenu() const {
 	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
 	cout << "\nTo complete your mission, you will need to:" << endl;
-	cout << "1. Walk around the estate and interact with the rooms.";
-	cout << " You begin in the library." << endl;
+	cout << "1. Walk around the estate and interact with the rooms." << endl;
 	cout << "2. We will decide whether or not to teleport weapons to you based"
 	        " off of your\nactions.";
 	cout << " If you come across a weapon, you must attempt to put it in your\n"
@@ -654,7 +695,7 @@ void Game::updateMap() {
 
 /*******************************************************************************
 Game::commitMurder() is a void function without parameters. It is called only if
- the player is in the billiard room and has four or more unique weapons. It
+ the player is in the murder room and has four or more unique weapons. It
  prints the available weapons and allows the user to pick one of them to
  commit the murder. It sets the murder bool to true.
 *******************************************************************************/
@@ -664,7 +705,7 @@ void Game::commitMurder() {
 	cout <<
 	     "\n********************************************************************************"
 	     << endl;
-	cout << "Mr. Boddy has entered the billiard room." << endl;
+	cout << "Mr. Boddy has entered the " << murderRoom << "." << endl;
 	cout << "You have successfully collected at least four unique weapons." <<
 	     endl;
 	cout << "This is your opportunity to murder him and flee the scene!" << endl;
@@ -706,11 +747,11 @@ void Game::commitMurder() {
 
 	if (weaponChoice == "pipe") {
 	cout << "You have murdered Mr. Boddy, with the lead " <<
-	     weaponChoice << ", in the Billiard Room." << endl;
+	     weaponChoice << ", in the " << murderRoom << "." << endl;
 	}
 	else {
 		cout << "You have murdered Mr. Boddy, with the " <<
-		     weaponChoice << ", in the Billiard Room." << endl;
+		     weaponChoice << ", in the " << murderRoom << "." << endl;
 	}
 
 	murder = true;

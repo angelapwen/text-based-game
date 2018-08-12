@@ -22,6 +22,7 @@
 #include "map.hpp"
 
 #include <string>
+#include <cstdlib> // std::rand
 
 class Game {
 private:
@@ -43,6 +44,7 @@ private:
 	Space* hall;
 
 	bool murder; // True if murder has been committed
+	bool discovery; // True if character has been found out before game ends
 	char character; // Stores the type of character player has chosen
 
 	void welcomeMenu() const;
@@ -52,13 +54,12 @@ private:
 	void commitMurder();
 	std::string weaponValidation() const;
 
-
 public:
 	Game();
 
 	void startGame();
 
-	int intValidation(int min, int max);
+	int intValidation(int min, int max) const;
 	void repeatMenu() const;
 
 	~Game();

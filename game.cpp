@@ -320,7 +320,7 @@ void Game::startGame() {
 		cout << "Congratulations, professor! You have completed your mission in "
 			  << steps << " moves." << endl;
 		cout << "We have activated a secret escape in the " << murderRoom <<
-					" ." << endl;
+					"." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
 		cout << "\n\nYour next mission will be:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
@@ -620,8 +620,7 @@ void Game::satchelChoice() {
 			satchel = new QueueSatchel;
 			cout << "\nYou have selected the Gold Satchel." << endl;
 			cout << "You have demonstrated your ambition. Should you succeed, you "
-			  "will be rewarded\n"
-	  "beyond your wildest dreams." << endl;
+			  "will be rewarded\nbeyond your wildest dreams." << endl;
 		}
 		default:
 			break;
@@ -820,6 +819,8 @@ Game::repeatMenu() is a void function without parameters. It displays the
 void Game::repeatMenu() const {
 	cout << "\n\t PLAY AGAIN?" << endl;
 	cout << "1. Try your hand at joining Hydra again." << endl;
+	cout << "** Remember: the room with the secret escape changes for each "
+			"trial." << endl;
 	cout << "2. Exit the program." << endl;
 	cout << "Make your choice: " << endl;
 }

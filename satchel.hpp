@@ -32,11 +32,11 @@ public:
 
 	// Pure virtual functions that will be overridden
 	virtual void addWeapon(std::string weapon) = 0;
-	virtual int getNumUniqueWeapons() = 0;
 	virtual void printWeapons() const = 0;
 
 	void addCapacity();
 	virtual void clearContents();
+	virtual int getNumUniqueWeapons();
 
 	// Accessor functions for each bool variable
 	bool getKnife() const;

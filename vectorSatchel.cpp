@@ -129,38 +129,6 @@ void VectorSatchel::updateWeapons() {
 }
 
 /*******************************************************************************
-VectorSatchel::getNumUniqueWeapons is a function without parameters that
- returns the int value of the numUniqueWeapons variable. It resets the count
- of the number of unique weapons, and then adds one depending on each bool
- variable so it does not count repeated weapons.
-*******************************************************************************/
-int VectorSatchel::getNumUniqueWeapons() {
-	// Reset unique weapon count
-	numUniqueWeapons = 0;
-
-	if (knife) {
-		numUniqueWeapons++;
-	}
-	if (wrench) {
-		numUniqueWeapons++;
-	}
-	if (rope) {
-		numUniqueWeapons++;
-	}
-	if (pipe) {
-		numUniqueWeapons++;
-	}
-	if (revolver) {
-		numUniqueWeapons++;
-	}
-	if (candlestick) {
-		numUniqueWeapons++;
-	}
-
-	return numUniqueWeapons;
-}
-
-/*******************************************************************************
 VectorSatchel::clearContents is a void function without parameters that calls
  Satchel::clearContents but also pops off all the items in the vector.
 *******************************************************************************/
@@ -179,5 +147,3 @@ void VectorSatchel::printWeapons() const {
 		cout << "- " << i << endl;
 	}
 }
-
-

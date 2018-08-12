@@ -27,8 +27,6 @@ public:
 
 	void addWeapon(std::string weapon) override;
 
-	int getNumUniqueWeapons() override;
-
 	void clearContents() override;
 
 	void printWeapons() const override;

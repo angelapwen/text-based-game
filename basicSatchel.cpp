@@ -29,8 +29,8 @@ BasicSatchel::addWeapon is a void function with a string parameter indicating
 *******************************************************************************/
 void BasicSatchel::addWeapon(std::string weapon) {
 	if (numUniqueWeapons >= capacity) {
-		cout << "Sorry, your Bronze Satchel is full and you cannot pick up any "
-			 "more weapons." << endl;
+		cout << "You have come across a " << weapon << ", but your Bronze "
+		"Satchel\nis full and you cannot pick up any more weapons." << endl;
 		cout << "You should focus on finding the room in which you will commit "
 			 << "your murder." << endl;
 		cout << "Hydra has destroyed the spare " << weapon << "." << endl;
@@ -40,7 +40,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 	else {
 		if ((weapon == "knife")) {
 			if (!knife) {
-				cout << "Congratulations! You have picked up a knife." << endl;
+				cout << "Congratulations! You have added a knife to your Bronze "
+				"Satchel."	<< endl;
 				knife = true;
 				numUniqueWeapons++;
 			}
@@ -53,7 +54,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 		}
 		else if ((weapon == "rope")) {
 			if (!rope) {
-				cout << "Congratulations! You have picked up a rope." << endl;
+				cout << "Congratulations! You have added a rope to your Bronze "
+				"Satchel."	<< endl;
 				rope = true;
 				numUniqueWeapons++;
 			}
@@ -66,7 +68,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 		}
 		else if ((weapon == "wrench")) {
 			if (!wrench) {
-				cout << "Congratulations! You have picked up a wrench." << endl;
+				cout << "Congratulations! You have added a wrench to your Bronze "
+				"Satchel."	<< endl;
 				wrench = true;
 				numUniqueWeapons++;
 			}
@@ -79,7 +82,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 		}
 		else if ((weapon == "revolver")) {
 			if (!revolver) {
-				cout << "Congratulations! You have picked up a revolver." << endl;
+				cout << "Congratulations! You have added a revolver to your "
+				"Bronze Satchel."	<< endl;
 				revolver = true;
 				numUniqueWeapons++;
 			}
@@ -92,7 +96,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 		}
 		else if ((weapon == "candlestick")) {
 			if (!candlestick) {
-				cout << "Congratulations! You have picked up a candlestick."
+				cout << "Congratulations! You have added a candlestick to your "
+				"Bronze Satchel."
 				     << endl;
 				candlestick = true;
 				numUniqueWeapons++;
@@ -106,7 +111,8 @@ void BasicSatchel::addWeapon(std::string weapon) {
 		}
 		else if ((weapon == "pipe")) {
 			if (!pipe) {
-				cout << "Congratulations! You have picked up a lead pipe." << endl;
+				cout << "Congratulations! You have added a lead pipe to your "
+				"Bronze Satchel." << endl;
 				pipe = true;
 				numUniqueWeapons++;
 			}

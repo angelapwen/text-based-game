@@ -161,6 +161,15 @@ int VectorSatchel::getNumUniqueWeapons() {
 }
 
 /*******************************************************************************
+VectorSatchel::clearContents is a void function without parameters that calls
+ Satchel::clearContents but also pops off all the items in the vector.
+*******************************************************************************/
+void VectorSatchel::clearContents() {
+	Satchel::clearContents();
+	satchel.clear();
+}
+
+/*******************************************************************************
 VectorSatchel::printWeapons is a void function without parameters that prints
  all contents of the vector.
 *******************************************************************************/
@@ -170,3 +179,5 @@ void VectorSatchel::printWeapons() const {
 		cout << "- " << i << endl;
 	}
 }
+
+

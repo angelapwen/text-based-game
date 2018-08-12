@@ -16,7 +16,7 @@ using std::endl;
 using std::cin;
 
 // Total number of moves the player is allowed before the game ends
-int maxMoves = 20;
+int maxMoves = 30;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member
@@ -30,7 +30,7 @@ Game::Game() {
 	satchel = nullptr; // Satchel will be allocated later
 	map = new Map(); // Construct map immediately
 	steps = 0;
-	murder = false;
+	murder = discovery = false;
 
 	// Allocate memory for and construct all rooms
 	study = new Quiet("study","candlestick","a book of meditation");
@@ -77,6 +77,51 @@ Game::Game() {
 
 	character = ' ';
 	current = nullptr; // Location of start depends on character choice
+
+	// Set location of murder to a random room
+	int murderLocation = (rand() % 9) + 1;
+	switch (murderLocation) {
+		case 1: {
+			murderRoom = "study";
+			break;
+		}
+		case 2: {
+			murderRoom = "hall";
+			break;
+		}
+		case 3: {
+			murderRoom = "lounge";
+			break;
+		}
+		case 4: {
+			murderRoom = "dining room";
+			break;
+		}
+		case 5: {
+			murderRoom = "kitchen";
+			break;
+		}
+		case 6: {
+			murderRoom = "ballroom";
+			break;
+		}
+		case 7: {
+			murderRoom = "conservatory";
+			break;
+		}
+		case 8: {
+			murderRoom = "billiard room";
+			break;
+		}
+		case 9: {
+			murderRoom = "library";
+			break;
+		}
+		default: {
+			murderRoom = " ";
+			break;
+		}
+	}
 }
 /*******************************************************************************
 Game::startGame() is a void function without parameters that runs the majority
@@ -102,29 +147,28 @@ void Game::startGame() {
 		satchel->addWeapon("revolver");
 	}
 
-	// If character is Colonel Mustard, increment Satchel capacity
+		// If character is Colonel Mustard, increment Satchel capacity
 	else if (character == 'm') {
 		cout << "Hello, Colonel Mustard." << endl;
 		satchel->addCapacity();
 	}
 
-	// If character is Mrs. White, turn switch on corner access
+		// If character is Mrs. White, turn switch on corner access
 	else if (character == 'w') {
 		cout << "Hello, Mrs. White." << endl;
-		current->setCornerAccess('y');
-		cout << "You will be able to access the corner passageways throughout "
-			 "the game." << endl;
+		cout << "Mr. Boddy wouldn't report his own maid to the police for being"
+			 " on his Estate." << endl;
 	}
 
-	// If character is Mr. Green, display room with escape door
+		// If character is Mr. Green, display room with escape door
 	else if (character == 'g') {
 		cout << "Hello, Mr. Green." << endl;
 		cout << "Thank you for your generous donation to Hydra." << endl;
-		cout << "The room you must commit the murder in is the billiard room."
-			 << endl;
+		cout << "The room you must commit the murder in is the " << murderRoom
+		     << "." << endl;
 	}
 
-	// If character is Mrs. Peacock, multiply the number of total moves
+		// If character is Mrs. Peacock, multiply the number of total moves
 	else if (character == 'p') {
 		cout << "Hello, Mrs. Peacock." << endl;
 		maxMoves *= 1.25;
@@ -133,7 +177,10 @@ void Game::startGame() {
 	}
 
 	else {
-		cout << "You're a brave man, Professor Plum." << endl;
+		cout << "Welcome, Professor Plum." << endl;
+		current->setCornerAccess('y');
+		cout << "You will be able to access the corner passageways throughout "
+		        "the game." << endl;
 	}
 
 	cout << "The Boddy Estate butler greets you at the entrance." << endl;
@@ -141,8 +188,9 @@ void Game::startGame() {
 	getchar();
 
 	// Repeat these steps while the murder has not been committed, the user
-			// has not elected to exit, and step count is below max
-	while (steps < maxMoves && !murder && !exit) {
+	// has not elected to exit, step count is below max, and random
+	// discovery event has not occurred
+	while (steps < maxMoves && !murder && !exit && !discovery) {
 		// Increment and print the step number
 		steps++;
 
@@ -156,9 +204,9 @@ void Game::startGame() {
 		map->printBoard();
 		map->printKey();
 
-		// First check if player has enough weapons and is in the Billiards Room
-		if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() == "billiard "
-			  "room") {
+		// Check if player has enough weapons and is in the appropriate room
+		if ((satchel->getNumUniqueWeapons()) > 3 &&
+		    current->getName() == murderRoom) {
 			current->roomWelcome();
 			commitMurder();
 		}
@@ -166,6 +214,17 @@ void Game::startGame() {
 		// If murder has not been committed, move forward with room action
 		if (!murder) {
 			current->roomWelcome();
+
+			// Chance 1 in 9 that character drops their satchel
+			int emptyChance = (rand() % 9) + 1;
+			switch (emptyChance) {
+				case 1: {
+					satchel->clearContents();
+					break;
+				}
+				default:
+					break;
+			}
 
 			// Store the weapon picked up (if any) from action method
 			weapon = current->action();
@@ -175,60 +234,79 @@ void Game::startGame() {
 				satchel->addWeapon(weapon);
 			}
 
-			// Check again if player has enough weapons and is in Billiards Room
+			// Check again if player has enough weapons and is in the correct room
 			if ((satchel->getNumUniqueWeapons()) > 3 && current->getName() ==
-			                                      "billiard room") {
+			                                            murderRoom) {
 				commitMurder();
 			}
 		}
 
-		// If murder has not been committed at this stage, display move menu
+		// If murder has not been committed at this stage, chance in 1 of 30
+		// that player is discovered by Boddy before moving.
 		if (!murder) {
-			cout << "\nIt is time to move to another room." << endl;
+			int discoveryChance = (rand() % 30) + 1;
 
-			// If character is Mrs. White, set corner access on
-			if (character == 'w') {
-				current->setCornerAccess('y');
-			}
-			// Else if character is not Mrs. White but has wrench, set corner
-			// access on
-			else if (satchel->getWrench()) {
-				cout << "\nHello from Hydra. We noticed that you have a wrench in";
-				cout << " your satchel. While you\nhave a wrench, you may access "
-				"the secret corner passageways in the Boddy Estate." << endl <<
-				     endl;
-				current->setCornerAccess('y');
-			}
-			// Else turn corner access off
-			else {
-				current->setCornerAccess('n');
-			}
-
-			// Display options for the user to move and get user choice
-			char move = current->makeMove();
-
-			// Depending on char returned, point current to new room or exit
-			switch (move) {
-				case 't':
-					current = current->getTop();
+			switch (discoveryChance) {
+				case 1: {
+					// Turn discovery on if character is not Mrs. White
+					if (character != 'w') {
+						discovery = true;
+					}
 					break;
-				case 'b':
-					current = current->getBottom();
-					break;
-				case 'l':
-					current = current->getLeft();
-					break;
-				case 'r':
-					current = current->getRight();
-					break;
-				case 'c':
-					current = current->getCorner();
-					break;
-				case 'e':
-					exit = true;
-					break;
+				}
 				default:
 					break;
+			}
+
+			// If discovery did not occur, move character to next room
+			if (!discovery) {
+				cout << "\nIt is time to move to another room." << endl;
+
+				// If character is Plum, set corner access on
+				if (character == 'o') {
+					current->setCornerAccess('y');
+				}
+					// Else if character is not Mrs. White but has wrench, set corner
+					// access on
+				else if (satchel->getWrench()) {
+					cout
+							<< "\nHello from Hydra. We noticed that you have a wrench in";
+					cout << " your satchel. While you\nhave a wrench, you may access "
+							   "the secret corner passageways in the Boddy Estate."
+							<< endl << endl;
+					current->setCornerAccess('y');
+				}
+					// Else turn corner access off
+				else {
+					current->setCornerAccess('n');
+				}
+
+				// Display options for the user to move and get user choice
+				char move = current->makeMove();
+
+				// Depending on char returned, point current to new room or exit
+				switch (move) {
+					case 't':
+						current = current->getTop();
+						break;
+					case 'b':
+						current = current->getBottom();
+						break;
+					case 'l':
+						current = current->getLeft();
+						break;
+					case 'r':
+						current = current->getRight();
+						break;
+					case 'c':
+						current = current->getCorner();
+						break;
+					case 'e':
+						exit = true;
+						break;
+					default:
+						break;
+				}
 			}
 		}
 	}
@@ -239,35 +317,54 @@ void Game::startGame() {
 
 	// If murder has been committed, display congratulations
 	if (murder) {
-		cout << "Congratulations, professor! You have completed your mission." <<
-		     endl;
-		cout << "It took you " << steps << " moves to complete your mission." <<
-		     endl;
-		cout << "We have activated a secret escape in the grandfather clock\n";
-		cout << "across from you in the billiard room." << endl;
+		cout << "Congratulations, professor! You have completed your mission in "
+			  << steps << " moves." << endl;
+		cout << "We have activated a secret escape in the " << murderRoom <<
+					" ." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
 		cout << "\n\nYour next mission will be:" << endl;
 		cout << "DEFEND YOUR INNOCENCE. FRAME ANOTHER GUEST FOR MR. BODDY'S "
-			 "MURDER." << endl;
+		        "MURDER." << endl;
 		cout << "The others will be here soon..." << endl;
 		cout << "\n\nRemember: Cut off a limb, and two more shall take its "
-			 "place." << endl;
+		        "place." << endl;
 	}
 
-		// Else if user reached max number of steps, display exit message
+	// Else if user reached max number of steps, display exit message
 	else if (steps >= maxMoves) {
 		cout << "Unfortunately, you exceeded the total number of moves to "
-				  "complete your mission." << endl;
+		        "complete your mission." << endl;
 		cout << "We have removed you from Mr. Boddy's estate." << endl;
 		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
 		cout << "The Hydra selection process is a dangerous one." << endl;
 		cout << "Those who do not successfully complete it are liabilities to "
-			 "our organization." << endl;
+		        "our organization." << endl;
 		cout << "Perhaps you may serve Hydra in your next life." << endl;
 		cout << "\n\n\nDo you have any last words before we begin?" << endl;
-	 }
+	}
 
-	// Else user has elected to exit, display exit message
+	// Else player has been discovered, display exit message
+	else if (discovery) {
+		cout << "Before you decide on your next move, Mr. Boddy walks into the " <<
+		     current->getName() << "." << endl;
+		cout << "You have been discovered after " << steps << " moves!!" << endl;
+		cout << "\nMR. BODDY: \"You aren't supposed to be in here.\"" << endl;
+		cout << "MR. BODDY: \"Are you trying to steal my things??\"" << endl;
+		cout << "MR. BODDY: \"I expected better from you. I'd better call the "
+		        "police. \"" << endl;
+		cout << "\nThe police have escorted you from Mr. Boddy's estate." << endl;
+		cout << "They do not find any evidence of stolen items on you and you "
+			 "are released." << endl;
+		cout << "\nYou have failed to complete your mission." << endl;
+		cout << "Not everyone is meant for the greatness of HYDRA." << endl;
+		cout << "The HYDRA selection process is a dangerous one." << endl;
+		cout << "Those who do not successfully complete it are liabilities to "
+		        "our organization." << endl;
+		cout << "Perhaps you may serve Hydra in your next life." << endl;
+		cout << "\n\n\nDo you have any last words before we begin?" << endl;
+	}
+
+	// Else if user has elected to exit, display exit message
 	else {
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
 		     " steps." << endl;
@@ -310,12 +407,11 @@ void Game::welcomeMenu() const {
 	cout << "\nYour mission: " ;
 	cout << "MURDER MR. JOHN BODDY BEFORE THE OTHER GUESTS ARRIVE." << endl;
 	cout << "\nTo complete your mission, you will need to:" << endl;
-	cout << "1. Walk around the estate and interact with the rooms.";
-	cout << " You begin in the library." << endl;
+	cout << "1. Walk around the estate and interact with the rooms." << endl;
 	cout << "2. We will decide whether or not to teleport weapons to you based"
-	        " off of your actions."	<< endl;
-	cout << "If you come across a weapon, you must attempt to put it in your "
-	        "satchel.\nYou may not leave weapons in the rooms for witnesses to "
+	        " off of your\nactions.";
+	cout << " If you come across a weapon, you must attempt to put it in your\n"
+	        "satchel. You may not leave weapons in the rooms for witnesses to "
 	        "find." << endl;
 	cout << "3. Once you have 4 unique weapons in your satchel, you must "
 	     << "find the correct\nroom in which to commit the murder.";
@@ -329,6 +425,11 @@ void Game::welcomeMenu() const {
 	       "rooms to complete your mission\nbefore the dinner party begins." <<
 	     endl;
 
+	cout << "\nAdditionally, there is a chance that Mr. Boddy will discover you "
+			"sneaking\naround his Estate.";
+	cout << " Mr. Boddy is a suspicious man, and should this happen, you\nwill "
+			"be reported to the police immediately." << endl;
+
 	cout << "\nTo assist you in completing your mission more quickly, we have "
 	        "found a way to\naccess the secret passageways between corner rooms in"
 	        " the Boddy Estate. When\nyour satchel contains the wrench weapon, you"
@@ -336,8 +437,8 @@ void Game::welcomeMenu() const {
 	        "tunnels that Mr. Boddy keeps locked up." << endl;
 
 	cout << "\nFinally, you may choose to use the Emergency Exit at any point "
-	        "in the game, although\nthis means you will not have completed your mission"
-	        " and have failed Hydra." << endl;
+	        "in the game, but\nthis means you will not have completed your "
+			"mission and have failed Hydra." << endl;
 	cout << "\nRemember: if a head is cut off, two more shall take its place." <<
 	     endl;
 	cout << "Hail, Hydra!" << endl;
@@ -362,9 +463,8 @@ void Game::characterChoice() {
 	cout << "Each disguise will come with a\nspecial feature. ";
 	cout << "Each character also begins in a different room in the estate." <<
 	     endl;
-	cout << "If you continue as yourself, you will not receive a special "
-			"feature- but Hydra\nwill take note of your ambition and courage." <<
-	     endl;
+	cout << "If you continue as yourself, you will also receive a special "
+			"feature." << endl;
 	cout << "\nThe disguises we have available are:" << endl;
 	cout << "\n- Miss Scarlet is a femme fetale." << endl;
 	cout << "Special Feature: Miss Scarlet has charmed a Hydra employee to let"
@@ -375,9 +475,9 @@ void Game::characterChoice() {
 			"than the\ndefault number."	<< endl;
 	cout << "Starting Location: Dining Room." << endl;
 	cout << "\n- Mrs. White is the disgruntled servant of the estate." << endl;
-	cout << "Special Feature: Mrs. White automatically has access to all the "
-			"corner\npassageways throughout the game, regardless of if she has "
-			"the wrench." << endl;
+	cout << "Special Feature: Mrs. White will never be randomly discovered by "
+			"Mr. Boddy, as\nshe is allowed to be in the Estate at any time."	<<
+	     endl;
 	cout << "Starting Location: Kitchen." << endl;
 	cout << "\n- Mr. Green is a mobster." << endl;
 	cout << "Special Feature: Mr. Green has paid one of the Hydra employees "
@@ -389,6 +489,9 @@ void Game::characterChoice() {
 			"number of\nmaximum moves before the dinner begins." << endl;
 	cout << "Starting Location: Conservatory." << endl;
 	cout << "\n- Complete your mission as Professor Plum." << endl;
+	cout << "Special Feature: you receive a key to access all the "
+			"corner passageways\nthroughout the game, regardless of if you have "
+			"the wrench." << endl;
 	cout << "Starting Location: Library." << endl;
 	cout << "\nHere is a map of the Estate:" << endl;
 	map->printBoard();
@@ -532,7 +635,7 @@ Game::intValidation is a function with two int parameters that returns an int
  value. It prompts the user for input and validates the input to be an
  integer between the min and max parameters, and returns the valid value.
 *******************************************************************************/
-int Game::intValidation(int min, int max) {
+int Game::intValidation(int min, int max) const {
 	int input;
 	cin >> input;
 
@@ -592,7 +695,7 @@ void Game::updateMap() {
 
 /*******************************************************************************
 Game::commitMurder() is a void function without parameters. It is called only if
- the player is in the billiard room and has four or more unique weapons. It
+ the player is in the murder room and has four or more unique weapons. It
  prints the available weapons and allows the user to pick one of them to
  commit the murder. It sets the murder bool to true.
 *******************************************************************************/
@@ -602,10 +705,12 @@ void Game::commitMurder() {
 	cout <<
 	     "\n********************************************************************************"
 	     << endl;
-	cout << "Mr. Boddy has entered the billiard room." << endl;
+	cout << "Mr. Boddy has entered the " << murderRoom << "." << endl;
 	cout << "You have successfully collected at least four unique weapons." <<
 	     endl;
 	cout << "This is your opportunity to murder him and flee the scene!" << endl;
+	cout << "\nPress enter when you are ready." << endl;
+	getchar();
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
 	cout << "The contents of your satchel: " << endl;
 
@@ -642,11 +747,11 @@ void Game::commitMurder() {
 
 	if (weaponChoice == "pipe") {
 	cout << "You have murdered Mr. Boddy, with the lead " <<
-	     weaponChoice << ", in the Billiard Room." << endl;
+	     weaponChoice << ", in the " << murderRoom << "." << endl;
 	}
 	else {
 		cout << "You have murdered Mr. Boddy, with the " <<
-		     weaponChoice << ", in the Billiard Room." << endl;
+		     weaponChoice << ", in the " << murderRoom << "." << endl;
 	}
 
 	murder = true;

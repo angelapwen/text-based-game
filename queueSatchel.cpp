@@ -73,14 +73,15 @@ void QueueSatchel::addWeapon(std::string weapon) {
 		candlestick = true;
 	}
 
-	cout << "\nYour new " << weapon << " has been added to the satchel." << endl;
+	cout << "\nYour new " << weapon << " has been added to your Gold Satchel."
+												<< endl;
 
 	// Print total weapons, list, and number of unique weapons
 	cout << "Your total weapon count is: " << satchel.size() << "." <<
 	     endl;
 	cout << "Your current weapon list is:" << endl;
 	printWeapons();
-	cout << "The number of unique weapons in your bag is: " <<
+	cout << "The number of unique weapons in your Gold Satchel is: " <<
 	     getNumUniqueWeapons() << "." << endl;
 }
 
@@ -159,6 +160,15 @@ int QueueSatchel::getNumUniqueWeapons() {
 }
 
 /*******************************************************************************
+QueueSatchel::clearContents is a void function without parameters that calls
+ Satchel::clearContents but also pops off all the items in the queue.
+*******************************************************************************/
+void QueueSatchel::clearContents() {
+	Satchel::clearContents();
+	satchel.clear();
+}
+
+/*******************************************************************************
 QueueSatchel::printWeapons is a void function without parameters that prints
  all contents of the vector.
 *******************************************************************************/
@@ -167,3 +177,5 @@ void QueueSatchel::printWeapons() const {
 		cout << "- " << i << endl;
 	}
 }
+
+

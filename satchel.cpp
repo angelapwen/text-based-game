@@ -59,3 +59,14 @@ bool Satchel::getKnife() const {
 bool Satchel::getWrench() const {
 	return wrench;
 }
+
+/*******************************************************************************
+Satchel::addCapacity() is a void function without parameters that is called
+ only when the player chooses the Colonel Mustard disguise. It increments the
+ capacity of the satchel by 1.
+*******************************************************************************/
+void Satchel::addCapacity() {
+	capacity++;
+	cout << "Your chosen satchel has a new capacity of " << capacity << "." <<
+	     endl;
+}

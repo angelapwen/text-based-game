@@ -23,7 +23,7 @@ int main() {
 	// Referenced from Program 3-32 of C++ Early Objects, 9th Edition
 	unsigned seed;
 
-	seed = static_cast<unsigned>(time(0));
+	seed = static_cast<unsigned>(time(nullptr));
 	srand(seed);
 
 	// Construct and begin game

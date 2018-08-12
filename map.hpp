@@ -32,7 +32,8 @@ public:
 	void placeLounge();
 	void placeHall();
 
-	void printBoard();
+	void printBoard() const;
+	void printKey() const;
 };
 
 

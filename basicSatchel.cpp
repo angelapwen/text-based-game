@@ -73,7 +73,7 @@ void BasicSatchel::addWeapon(std::string weapon) {
 			// Else user already had a wrench
 			else {
 				cout << "You have picked up a wrench, but your satchel already "
-				        "contained oned." << endl;
+				        "contained one." << endl;
 				cout << "Hydra has destroyed the spare wrench." << endl;
 			}
 		}

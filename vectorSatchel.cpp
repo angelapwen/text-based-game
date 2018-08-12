@@ -31,7 +31,7 @@ void VectorSatchel::addWeapon(std::string weapon) {
 	cout << "\nCongratulations! You have found a " << weapon << "." << endl;
 
 	// If vector is at capacity, call randomDrop
-	if (satchel.size() == 5) {
+	if (satchel.size() == capacity) {
 		cout << "Oops! Your Silver Satchel is already full with " << capacity <<
 		     " weapons." << endl;
 		cout << "Before adding your new " << weapon << ", you will have to "

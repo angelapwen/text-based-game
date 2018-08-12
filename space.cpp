@@ -75,7 +75,7 @@ void Space::roomWelcome() const {
 }
 
 /*******************************************************************************
-Space:: is an acccessor function returning the string value of the name.
+Space:: is an accessor function returning the string value of the name.
 *******************************************************************************/
 string Space::getName() const {
 	return name;

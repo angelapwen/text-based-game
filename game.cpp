@@ -16,7 +16,7 @@ using std::endl;
 using std::cin;
 
 // Total number of moves the player is allowed before the game ends
-int maxMoves = 20;
+int maxMoves = 30;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member
@@ -159,7 +159,7 @@ void Game::startGame() {
 		map->printBoard();
 		map->printKey();
 
-		// First check if player has enough weapons and is in the Billiards Room
+		// Check if player has enough weapons and is in the Billiards Room
 		if ((satchel->getNumUniqueWeapons()) > 3 &&
 		    current->getName() == "billiard "
 		                          "room") {
@@ -170,6 +170,17 @@ void Game::startGame() {
 		// If murder has not been committed, move forward with room action
 		if (!murder) {
 			current->roomWelcome();
+
+			// Chance 1 in 9 that character drops their satchel
+			int emptyChance = (rand() % 9) + 1;
+			switch (emptyChance) {
+				case 1: {
+					satchel->clearContents();
+					break;
+				}
+				default:
+					break;
+			}
 
 			// Store the weapon picked up (if any) from action method
 			weapon = current->action();
@@ -294,7 +305,7 @@ void Game::startGame() {
 	else if (discovery) {
 		cout << "Before you decide on your next move, Mr. Boddy walks into the " <<
 		     current->getName() << "." << endl;
-		cout << "You have been discovered!!" << endl;
+		cout << "You have been discovered after " << steps << " moves!!" << endl;
 		cout << "\nMR. BODDY: \"You aren't supposed to be in here.\"" << endl;
 		cout << "MR. BODDY: \"Are you trying to steal my things??\"" << endl;
 		cout << "MR. BODDY: \"I expected better from you. I'd better call the "

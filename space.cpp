@@ -71,7 +71,7 @@ Space::roomWelcome is a void function without parameters that simply displays
  the room name when the player enters.
 *******************************************************************************/
 void Space::roomWelcome() const {
-	cout << "\nYou have entered the " << name << "." << endl;
+	cout << "\nYou have entered the " << name << ".\n" << endl;
 }
 
 /*******************************************************************************

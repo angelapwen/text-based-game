@@ -159,6 +159,15 @@ int QueueSatchel::getNumUniqueWeapons() {
 }
 
 /*******************************************************************************
+QueueSatchel::clearContents is a void function without parameters that calls
+ Satchel::clearContents but also pops off all the items in the queue.
+*******************************************************************************/
+void QueueSatchel::clearContents() {
+	Satchel::clearContents();
+	satchel.clear();
+}
+
+/*******************************************************************************
 QueueSatchel::printWeapons is a void function without parameters that prints
  all contents of the vector.
 *******************************************************************************/
@@ -167,3 +176,5 @@ void QueueSatchel::printWeapons() const {
 		cout << "- " << i << endl;
 	}
 }
+
+

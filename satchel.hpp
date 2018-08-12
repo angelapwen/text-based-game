@@ -36,6 +36,7 @@ public:
 	virtual void printWeapons() const = 0;
 
 	void addCapacity();
+	virtual void clearContents();
 
 	// Accessor functions for each bool variable
 	bool getKnife() const;

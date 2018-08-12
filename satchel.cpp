@@ -72,6 +72,24 @@ void Satchel::addCapacity() {
 }
 
 /*******************************************************************************
+Satchel::clearContents is a void function without parameters that is called
+ when the random event happens that makes the player drop the bag. It clears
+ all the weapons from the satchel and returns the unique weapon count to 0.
+*******************************************************************************/
+void Satchel::clearContents() {
+	candlestick = rope = revolver = pipe = knife = wrench = false;
+	numUniqueWeapons = 0;
+	cout << "Uh oh! You dropped your satchel, butterfingers!" << endl;
+	cout << "Someone might be coming." << endl;
+	cout << "Pick up your satchel and forget the weapons." << endl;
+	cout << "Hydra will take care of them." << endl;
+	cout << "\nPress enter to pick up your satchel and hide." << endl;
+	getchar();
+	cout << "The footsteps you heard fade away. Phew!" << endl;
+	cout << "Unfortunately, however, your satchel is now empty.\n" << endl;
+}
+
+/*******************************************************************************
 Satchel::~Satchel is a default virtual destructor because the Satchel class
  includes virtual functions.
 *******************************************************************************/

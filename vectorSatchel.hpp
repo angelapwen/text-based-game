@@ -29,6 +29,8 @@ public:
 
 	int getNumUniqueWeapons() override;
 
+	void clearContents() override;
+
 	void printWeapons() const override;
 };
 

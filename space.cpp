@@ -105,57 +105,57 @@ char Space::makeMove() const {
 
 	// Print the options available in the current room
 	if (this->top != nullptr) {
-		cout << "- Top: " ;
+		cout << "- top: " ;
 		cout << "This would lead to the " << this->top->name << "." << endl;
 	}
 	if (this->bottom != nullptr) {
-		cout << "- Bottom: ";
+		cout << "- bottom: ";
 		cout << "This would lead to the " << this->bottom->name << "." << endl;
 	}
 	if (this->left != nullptr) {
-		cout << "- Left: ";
+		cout << "- left: ";
 		cout << "This would lead to the " << this->left->name << "." << endl;
 	}
 	if (this->right != nullptr) {
-		cout << "- Right: ";
+		cout << "- right: ";
 		cout << "This would lead to the " << this->right->name << "." << endl;
 	}
 
 	// Display corner option only if the bool is true
 	if (cornerAccess) {
 		if (this->corner != nullptr) {
-			cout << "- Corner: ";
+			cout << "- corner: ";
 			cout << "This would lead to the " << this->corner->name << "." << endl;
 		}
 	}
 
-	cout << "- Exit: ";
+	cout << "- exit: ";
 	cout << "You may choose the Emergency Exit and leave your mission "
 			"incomplete." << endl;
 
-	cout << "Enter only Top, Bottom, Left, Right, Corner, or Exit." << endl;
+	cout << "Enter only top, bottom, left, right, corner, or exit." << endl;
 
 	string choice = moveValidation();
 
 	// Return the char value of the validated move
-	if (choice == "Top") {
+	if (choice == "top") {
 		return 't';
 	}
 
-	else if (choice == "Bottom") {
+	else if (choice == "bottom") {
 		return 'b';
 	}
 
-	else if (choice == "Left") {
+	else if (choice == "left") {
 		return 'l';
 	}
 
-	else if (choice == "Right") {
+	else if (choice == "right") {
 		return 'r';
 	}
 
 	// Else user picked corner
-	else if (choice == "Corner") {
+	else if (choice == "corner") {
 		return 'c';
 	}
 
@@ -181,8 +181,8 @@ string Space::moveValidation() const{
 		cin >> input;
 
 		// Try again if input is not one of the directions
-		while (input != "Top" && input != "Bottom" && input != "Left" && input !=
-	          "Right" && input != "Corner" && input != "Exit") {
+		while (input != "top" && input != "bottom" && input != "left" && input !=
+	          "right" && input != "corner" && input != "exit") {
 			cout << "Input must be a valid direction for this room." << endl;
 			cout << "Please try again: ";
 			cin.clear();
@@ -194,24 +194,24 @@ string Space::moveValidation() const{
 		cin.ignore(256, '\n');
 
 		// Check if direction input points to nullptr
-		if (input == "Top" && top == nullptr) {
+		if (input == "top" && top == nullptr) {
 			cout << "Top does not lead anywhere. Try again.";
 		}
-		else if (input == "Bottom" && bottom == nullptr) {
+		else if (input == "bottom" && bottom == nullptr) {
 			cout << "Bottom does not lead anywhere. Try again.";
 		}
-		else if (input == "Left" && left == nullptr) {
+		else if (input == "left" && left == nullptr) {
 			cout << "Left does not lead anywhere. Try again.";
 		}
-		else if (input == "Right" && right == nullptr) {
+		else if (input == "right" && right == nullptr) {
 			cout << "Right does not lead anywhere. Try again.";
 		}
 		// Else if corner does not lead anywhere
-		else if (input == "Corner" && corner == nullptr) {
+		else if (input == "corner" && corner == nullptr) {
 			cout << "Corner does not lead anywhere. Try again.";
 		}
 		// Else if corner is an option, but access is off
-		else if (input == "Corner" && corner != nullptr && !cornerAccess) {
+		else if (input == "corner" && corner != nullptr && !cornerAccess) {
 			cout << "Nice try, but you can't access the secret corner passageway "
 			  "now!" << endl;
 		}

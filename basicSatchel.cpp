@@ -29,8 +29,8 @@ BasicSatchel::addWeapon is a void function with a string parameter indicating
 *******************************************************************************/
 void BasicSatchel::addWeapon(std::string weapon) {
 	if (numUniqueWeapons >= capacity) {
-		cout << "Sorry, your Bronze Satchel is full and you cannot pick up any "
-			 "more weapons." << endl;
+		cout << "You have come across a " << weapon << ", but your Bronze "
+		"Satchel\nis full and you cannot pick up any more weapons." << endl;
 		cout << "You should focus on finding the room in which you will commit "
 			 << "your murder." << endl;
 		cout << "Hydra has destroyed the spare " << weapon << "." << endl;

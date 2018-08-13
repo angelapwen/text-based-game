@@ -16,7 +16,7 @@ using std::endl;
 using std::cin;
 
 // Total number of moves the player is allowed before the game ends
-int maxMoves = 30;
+int maxMoves = 20;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member

@@ -1,11 +1,9 @@
-# text-based-game
+# Clue: The Prequel
 "Clue: The Prequel" is a text-based, one-player adventure game written in C++ for the command line.
 
-The player may choose one of the original characters in the board game "Clue": Miss Scarlet, Colonel Mustard, Mrs. White, Mr. Green, Mrs. Peacock, and Professor Plum with which to complete the mission.
-The player may also choose amongst Bronze, Silver, and Gold Satchels with which to carry weapons around. Each character and satchel type has unique features. Gameplay incorporates random events such as being discovered and dropping the satchel. 
+The player may choose one of the original characters in the board game "Clue": Miss Scarlet, Colonel Mustard, Mrs. White, Mr. Green, Mrs. Peacock, and Professor Plum with which to complete the mission. The player may also choose amongst Bronze, Silver, and Gold Satchels with which to carry weapons around. Each character and satchel type has unique features. Gameplay incorporates random events such as being discovered and dropping the satchel. 
 
-##Background
-
+## Background
 I created this project after completing a four-month, two-part Introduction to Computer Science course. I wanted to create a game that pays homage to one of my favorite childhood games, "Clue," while demonstrating understanding of the following concepts in object-oriented programming:
 - Pointers
 - Memory management
@@ -14,7 +12,5 @@ I created this project after completing a four-month, two-part Introduction to C
 - Linked Classes
 - STL Containers
 
-##To Run
+## To Run
 Use `make` at the command line to compile.
-
-##Screenshots

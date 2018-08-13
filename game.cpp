@@ -347,7 +347,8 @@ void Game::startGame() {
 	else if (discovery) {
 		cout << "Before you decide on your next move, Mr. Boddy walks into the " <<
 		     current->getName() << "." << endl;
-		cout << "You have been discovered after " << steps << " moves!!" << endl;
+		cout << "You have been discovered after " << steps << " move(s)!!" <<
+		     endl;
 		cout << "\nMR. BODDY: \"You aren't supposed to be in here.\"" << endl;
 		cout << "MR. BODDY: \"Are you trying to steal my things??\"" << endl;
 		cout << "MR. BODDY: \"I expected better from you. I'd better call the "
@@ -367,7 +368,7 @@ void Game::startGame() {
 	// Else if user has elected to exit, display exit message
 	else {
 		cout << "You have chosen to use the Emergency Exit after " << steps <<
-		     " steps." << endl;
+		     " move(s)." << endl;
 		cout << "You decided to leave your mission incomplete." << endl;
 		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
 		cout << "The HYDRA selection process is a dangerous one." << endl;
@@ -389,7 +390,7 @@ void Game::welcomeMenu() const {
 	     "\n********************************************************************************"
 	     << endl;
 
-	cout << "\n\t\t\t\t\t\t\t   Clue: The Prequel" << endl;
+	cout << "\n\t\t\t\tClue: The Prequel" << endl;
 	cout <<
 	     "\n********************************************************************************"
 	     << endl;

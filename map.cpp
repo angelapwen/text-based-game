@@ -147,5 +147,5 @@ void Map::printBoard() const {
 /* printKey is a void method without parameters. It displays the key for
  * the board. */
 void Map::printKey() const {
-	std::cout << "\t\t\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
+	std::cout << "\t\t\t\tKEY: * YOU ARE HERE" << std::endl;
 }

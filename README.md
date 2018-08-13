@@ -14,3 +14,4 @@ I created this project after completing a four-month, two-part Introduction to C
 
 ## To Run
 Use `make` at the command line to compile.
+`./clue` to run.

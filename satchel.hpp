@@ -15,8 +15,8 @@
 
 class Satchel {
 protected:
-	int capacity; // Number of weapons satchel can hold
-	int numUniqueWeapons;
+	unsigned capacity; // Number of weapons satchel can hold
+	unsigned numUniqueWeapons;
 
 	// Bool variables indicating whether the satchel contains this weapon or not
 	bool knife;

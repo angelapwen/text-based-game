@@ -15,22 +15,22 @@ using std::cout;
 using std::endl;
 using std::cin;
 
-// Total number of moves the player is allowed before the game ends
-int maxMoves = 20;
-
 /*******************************************************************************
 The Game class default and only constructor initializes the member
- variables steps to 0 and murder to false. It also creates a Map object
- with the Map pointer member variable, and sets the satchel member variable
- to nullptr. It then constructs all nine Space pointers for each room, and
- links the rooms to one another. Finally, it sets the Space pointer
- current, indicating the player's current location, to the library.
+ variables steps to 0 and murder to false, and the max number of moves to 20.
+ It also creates a Map object with the Map pointer member variable, and sets
+ the satchel member variable to nullptr. It then constructs all nine Space
+ pointers for each room, and links the rooms to one another. It sets
+ the Space pointer current, indicating the player's current location, to
+ nullptr as it will be decided when the player chooses a character. It also
+ randomizes the location of the room the murder will occur in.
 *******************************************************************************/
 Game::Game() {
 	satchel = nullptr; // Satchel will be allocated later
 	map = new Map(); // Construct map immediately
 	steps = 0;
 	murder = discovery = false;
+	maxMoves = 20; // Allow 20 moves before game ends
 
 	// Allocate memory for and construct all rooms
 	study = new Quiet("study","candlestick","a book of meditation");
@@ -125,18 +125,19 @@ Game::Game() {
 }
 /*******************************************************************************
 Game::startGame() is a void function without parameters that runs the majority
- of the game loop. It allows the player to move to new rooms, checks if the
- murder can be committed, and displays the exit messages depending on
- whether the player has won, quit the game, or lost.
+ of the game loop. It allows the player to choose a character, choose a
+ satchel, move to new rooms, checks if the murder can be committed, and
+ displays the exit messages depending on whether the player has won, quit the
+ game, been discovered, or taken too many steps.
 *******************************************************************************/
 void Game::startGame() {
 	welcomeMenu();
 
-	characterChoice();
+	characterChoice(); // Choose appropriate character
 	satchelChoice(); // Construct appropriate satchel
 
-	string weapon;
-	bool exit = false;
+	string weapon; // Weapon picked up every round
+	bool exit = false; // Set bool flag to false until player chosoes to exit
 
 	cout <<
 	     "********************************************************************************"
@@ -147,20 +148,20 @@ void Game::startGame() {
 		satchel->addWeapon("revolver");
 	}
 
-		// If character is Colonel Mustard, increment Satchel capacity
+	// If character is Colonel Mustard, increment Satchel capacity
 	else if (character == 'm') {
 		cout << "Hello, Colonel Mustard." << endl;
 		satchel->addCapacity();
 	}
 
-		// If character is Mrs. White, turn switch on corner access
+	// If character is Mrs. White, turn switch on corner access
 	else if (character == 'w') {
 		cout << "Hello, Mrs. White." << endl;
 		cout << "Mr. Boddy wouldn't report his own maid to the police for being"
 			 " on his Estate." << endl;
 	}
 
-		// If character is Mr. Green, display room with escape door
+	// If character is Mr. Green, display room with escape door
 	else if (character == 'g') {
 		cout << "Hello, Mr. Green." << endl;
 		cout << "Thank you for your generous donation to Hydra." << endl;
@@ -168,7 +169,7 @@ void Game::startGame() {
 		     << "." << endl;
 	}
 
-		// If character is Mrs. Peacock, multiply the number of total moves
+	// If character is Mrs. Peacock, multiply the number of total moves
 	else if (character == 'p') {
 		cout << "Hello, Mrs. Peacock." << endl;
 		maxMoves *= 1.25;
@@ -630,6 +631,7 @@ void Game::satchelChoice() {
 	cout << "\nPress enter to take your satchel and begin your mission."	<< endl;
 	getchar();
 }
+
 /*******************************************************************************
 Game::intValidation is a function with two int parameters that returns an int
  value. It prompts the user for input and validates the input to be an
@@ -655,6 +657,7 @@ int Game::intValidation(int min, int max) const {
 
 	return input;
 }
+
 /*******************************************************************************
 Game::updateMap() is a void function without parameters. It is called in the
  beginning of each step to update the map depending on where the player is.

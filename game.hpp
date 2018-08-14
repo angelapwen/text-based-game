@@ -31,6 +31,7 @@ private:
 	Satchel* satchel;
 
 	int steps; // Count number of moves that have passed
+	int maxMoves; // Total number of moves player is allowed
 	Space* current; // Where the player is currently located
 
 	Space* study;
@@ -43,7 +44,7 @@ private:
 	Space* lounge;
 	Space* hall;
 
-	std::string murderRoom;
+	std::string murderRoom; // Name of the room that murder must occur in
 
 	bool murder; // True if murder has been committed
 	bool discovery; // True if character has been found out before game ends

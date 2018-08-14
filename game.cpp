@@ -17,7 +17,7 @@ using std::cin;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member
- variables moves to 0 and murder to false, and the max number of moves to 20.
+ variables moves to 0 and murder to false, and the max number of moves to 24.
  It also creates a Map object with the Map pointer member variable, and sets
  the satchel member variable to nullptr. It then constructs all nine Space
  pointers for each room, and links the rooms to one another. It sets
@@ -30,7 +30,7 @@ Game::Game() {
 	map = new Map(); // Construct map immediately
 	moves = 0;
 	murder = discovery = false;
-	maxMoves = 20; // Allow 20 moves before game ends
+	maxMoves = 24; // Allow 24 moves before game ends
 
 	// Allocate memory for and construct all rooms
 	study = new Quiet("study","candlestick","a book of meditation");

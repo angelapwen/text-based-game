@@ -14,10 +14,10 @@ using std::endl;
 
 /*******************************************************************************
 The Satchel class default constructor initializes the bool variables to false
- and int variables to -1. It should not be called as Satchel.
+ and unsigned variables to 0. It should not be called.
 *******************************************************************************/
 Satchel::Satchel() {
-	capacity = numUniqueWeapons = -1;
+	capacity = numUniqueWeapons = 0;
 	knife = rope = wrench = revolver = candlestick = pipe = false;
 }
 
@@ -26,7 +26,7 @@ The Satchel class 1-parameter constructor initializes the satchel's capacity
  to the int parameter. It initializes the number of unique weapons to 0 and
  sets all the bool variables to false.
 *******************************************************************************/
-Satchel::Satchel(int capacityIn) {
+Satchel::Satchel(unsigned capacityIn) {
 	capacity = capacityIn;
 	numUniqueWeapons = 0;
 	knife = rope = wrench = revolver = candlestick = pipe = false;

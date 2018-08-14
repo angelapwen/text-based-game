@@ -28,7 +28,7 @@ protected:
 
 public:
 	Satchel();
-	explicit Satchel(int capacityIn); // 1-parameter constructor
+	explicit Satchel(unsigned capacityIn); // 1-parameter constructor
 
 	// Pure virtual functions that will be overridden
 	virtual void addWeapon(std::string weapon) = 0;

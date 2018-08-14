@@ -105,11 +105,11 @@ char Space::makeMove() const {
 
 	// Print the options available in the current room
 	if (this->top != nullptr) {
-		cout << "- top: " ;
+		cout << "- up: " ;
 		cout << "This would lead to the " << this->top->name << "." << endl;
 	}
 	if (this->bottom != nullptr) {
-		cout << "- bottom: ";
+		cout << "- down: ";
 		cout << "This would lead to the " << this->bottom->name << "." << endl;
 	}
 	if (this->left != nullptr) {
@@ -133,16 +133,16 @@ char Space::makeMove() const {
 	cout << "You may choose the Emergency Exit and leave your mission "
 			"incomplete." << endl;
 
-	cout << "Enter only top, bottom, left, right, corner, or exit." << endl;
+	cout << "Enter only up, down, left, right, corner, or exit." << endl;
 
 	string choice = moveValidation();
 
 	// Return the char value of the validated move
-	if (choice == "top") {
+	if (choice == "up") {
 		return 't';
 	}
 
-	else if (choice == "bottom") {
+	else if (choice == "down") {
 		return 'b';
 	}
 
@@ -181,7 +181,7 @@ string Space::moveValidation() const{
 		cin >> input;
 
 		// Try again if input is not one of the directions
-		while (input != "top" && input != "bottom" && input != "left" && input !=
+		while (input != "up" && input != "down" && input != "left" && input !=
 	          "right" && input != "corner" && input != "exit") {
 			cout << "Input must be a valid direction for this room." << endl;
 			cout << "Please try again: ";
@@ -194,11 +194,11 @@ string Space::moveValidation() const{
 		cin.ignore(256, '\n');
 
 		// Check if direction input points to nullptr
-		if (input == "top" && top == nullptr) {
-			cout << "Top does not lead anywhere. Try again.";
+		if (input == "up" && top == nullptr) {
+			cout << "Up does not lead anywhere. Try again.";
 		}
-		else if (input == "bottom" && bottom == nullptr) {
-			cout << "Bottom does not lead anywhere. Try again.";
+		else if (input == "down" && bottom == nullptr) {
+			cout << "Down does not lead anywhere. Try again.";
 		}
 		else if (input == "left" && left == nullptr) {
 			cout << "Left does not lead anywhere. Try again.";

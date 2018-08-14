@@ -17,7 +17,7 @@ using std::cin;
 
 /*******************************************************************************
 The Game class default and only constructor initializes the member
- variables steps to 0 and murder to false, and the max number of moves to 20.
+ variables moves to 0 and murder to false, and the max number of moves to 20.
  It also creates a Map object with the Map pointer member variable, and sets
  the satchel member variable to nullptr. It then constructs all nine Space
  pointers for each room, and links the rooms to one another. It sets
@@ -28,7 +28,7 @@ The Game class default and only constructor initializes the member
 Game::Game() {
 	satchel = nullptr; // Satchel will be allocated later
 	map = new Map(); // Construct map immediately
-	steps = 0;
+	moves = 0;
 	murder = discovery = false;
 	maxMoves = 20; // Allow 20 moves before game ends
 
@@ -191,14 +191,14 @@ void Game::startGame() {
 	// Repeat these steps while the murder has not been committed, the user
 	// has not elected to exit, step count is below max, and random
 	// discovery event has not occurred
-	while (steps < maxMoves && !murder && !exit && !discovery) {
+	while (moves < maxMoves && !murder && !exit && !discovery) {
 		// Increment and print the step number
-		steps++;
+		moves++;
 
 		cout <<
 		     "********************************************************************************"
 		     << endl;
-		cout << "You are on Move #" << steps << "." << endl;
+		cout << "You are on Move #" << moves << "." << endl;
 
 		// Move player to correct place and print board
 		updateMap();
@@ -319,7 +319,7 @@ void Game::startGame() {
 	// If murder has been committed, display congratulations
 	if (murder) {
 		cout << "Congratulations, professor! You have completed your mission in "
-			  << steps << " moves." << endl;
+			  << moves << " moves." << endl;
 		cout << "We have activated a secret escape in the " << murderRoom <<
 					"." << endl;
 		cout << "Open the door and step in to your freedom." << endl;
@@ -331,8 +331,8 @@ void Game::startGame() {
 		        "place." << endl;
 	}
 
-	// Else if user reached max number of steps, display exit message
-	else if (steps >= maxMoves) {
+	// Else if user reached max number of moves, display exit message
+	else if (moves >= maxMoves) {
 		cout << "Unfortunately, you exceeded the total number of moves to "
 		        "complete your mission." << endl;
 		cout << "We have removed you from Mr. Boddy's estate." << endl;
@@ -348,7 +348,7 @@ void Game::startGame() {
 	else if (discovery) {
 		cout << "Before you decide on your next move, Mr. Boddy walks into the " <<
 		     current->getName() << "." << endl;
-		cout << "You have been discovered after " << steps << " move(s)!!" <<
+		cout << "You have been discovered after " << moves << " move(s)!!" <<
 		     endl;
 		cout << "\nMR. BODDY: \"You aren't supposed to be in here.\"" << endl;
 		cout << "MR. BODDY: \"Are you trying to steal my things??\"" << endl;
@@ -368,7 +368,7 @@ void Game::startGame() {
 
 	// Else if user has elected to exit, display exit message
 	else {
-		cout << "You have chosen to use the Emergency Exit after " << steps <<
+		cout << "You have chosen to use the Emergency Exit after " << moves <<
 		     " move(s)." << endl;
 		cout << "You decided to leave your mission incomplete." << endl;
 		cout << "\nNot everyone is meant for the greatness of HYDRA." << endl;
@@ -715,7 +715,7 @@ void Game::commitMurder() {
 	cout << "\nPress enter when you are ready." << endl;
 	getchar();
 	cout << "Which weapon would you like to use to kill Mr. Boddy?" << endl;
-	cout << "The contents of your satchel: " << endl;
+	cout << "The contents of your satchel are: " << endl;
 
 	// Print weapons in the satchel
 	satchel->printWeapons();

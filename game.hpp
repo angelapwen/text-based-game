@@ -30,7 +30,7 @@ private:
 
 	Satchel* satchel;
 
-	int steps; // Count number of moves that have passed
+	int moves; // Count number of moves that have passed
 	int maxMoves; // Total number of moves player is allowed
 	Space* current; // Where the player is currently located
 

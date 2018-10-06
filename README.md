@@ -17,3 +17,5 @@ I created this project after completing a four-month, two-part Introduction to C
 ## To Run
 Use `make` at the command line to compile.
 `./clue` to run.
+
+For your convenience, you may also run on [Repl.it](https://repl.it/repls/RedSimpleRoutes).

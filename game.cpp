@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Program: CS 162 Final Project -- Clue: The Prequel
+ * Program: Clue: The Prequel
  * Name: Angela Wen
  * Date: August 6, 2018
  * Description: game.cpp is the Game class implementation file. It implements a
